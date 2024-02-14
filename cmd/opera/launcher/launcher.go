@@ -60,6 +60,7 @@ var (
 	legacyRpcFlags   []cli.Flag
 	rpcFlags         []cli.Flag
 	metricsFlags     []cli.Flag
+	networkFlags     []cli.Flag
 )
 
 func initFlags() {
@@ -179,7 +180,12 @@ func initFlags() {
 		utils.MetricsInfluxDBOrganizationFlag,
 		tracing.EnableFlag,
 	}
-
+	/*
+		networkFlags = []cli.Flag{
+			ValidatorsFileFlag,
+			NetworkTypeFlag,
+		}
+	*/
 	nodeFlags = []cli.Flag{}
 	nodeFlags = append(nodeFlags, gpoFlags...)
 	nodeFlags = append(nodeFlags, accountFlags...)
@@ -188,6 +194,7 @@ func initFlags() {
 	nodeFlags = append(nodeFlags, txpoolFlags...)
 	nodeFlags = append(nodeFlags, operaFlags...)
 	nodeFlags = append(nodeFlags, legacyRpcFlags...)
+	// app.Flags = append(app.Flags, networkFlags...)
 }
 
 // init the CLI app.
