@@ -180,12 +180,12 @@ func initFlags() {
 		utils.MetricsInfluxDBOrganizationFlag,
 		tracing.EnableFlag,
 	}
-	/*
-		networkFlags = []cli.Flag{
-			ValidatorsFileFlag,
-			NetworkTypeFlag,
-		}
-	*/
+
+	networkFlags = []cli.Flag{
+		ValidatorsFileFlag,
+		NetworkTypeFlag,
+	}
+
 	nodeFlags = []cli.Flag{}
 	nodeFlags = append(nodeFlags, gpoFlags...)
 	nodeFlags = append(nodeFlags, accountFlags...)
@@ -194,7 +194,7 @@ func initFlags() {
 	nodeFlags = append(nodeFlags, txpoolFlags...)
 	nodeFlags = append(nodeFlags, operaFlags...)
 	nodeFlags = append(nodeFlags, legacyRpcFlags...)
-	// app.Flags = append(app.Flags, networkFlags...)
+
 }
 
 // init the CLI app.
@@ -234,6 +234,8 @@ func init() {
 		snapshotCommand,
 		// See dbcmd.go
 		dbCommand,
+		// initnet.go
+		InitNetCommand,
 	}
 	sort.Sort(cli.CommandsByName(app.Commands))
 
@@ -243,6 +245,7 @@ func init() {
 	app.Flags = append(app.Flags, consoleFlags...)
 	app.Flags = append(app.Flags, debug.Flags...)
 	app.Flags = append(app.Flags, metricsFlags...)
+	app.Flags = append(app.Flags, networkFlags...)
 
 	app.Before = func(ctx *cli.Context) error {
 		if err := debug.Setup(ctx); err != nil {
