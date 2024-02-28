@@ -37,6 +37,14 @@ glide.lock
 *.tgz
 *.zip
 
+# scripts
+scripts/genesis.g
+scripts/make.sh
+scripts/pass.txt
+scripts/logs
+scripts/datadir
+scripts/validators.txt
+
 # opera project specific
 scripts/certs
 scripts/nodes
