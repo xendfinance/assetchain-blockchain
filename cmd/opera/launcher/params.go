@@ -12,12 +12,12 @@ import (
 var (
 	Bootnodes = map[string][]string{
 		"Vitra Testnet": {
-			"enode://1098c965495ea2d3c1f4cbc521f41fa0bcc46ffa48ee288c93a34406f4e11c86ea9d58496817fe4a6c0d1c01eaa6d19d17b45cdbdd17243663d8867258e72704@main-node.vitrafoundation-rpc.com:3000",
+			"enode://05b63dd3b86bf547cad299180df834dca5bc995dda1eb5803ce980d02447d73d3c0aa28bebc346f11a43a8e40c714a2ffed24bffd8bdfbbaef3c1d2e4428a66d@nlb.vitrafoundation-rpc.com:3000",
 		},
 	}
 
 	testnetHeader = genesis.Header{
-		GenesisID:   hash.HexToHash("0xd4d335784987ec5fb21f1c8f77b6fcd150f34185d0b9ab24af1f39461c3584dd"),
+		GenesisID:   hash.HexToHash("0x2b0e07eb61740e8409859c4dc2f76a7ce11df34bab4f686bc24aa2b2edf829eb"),
 		NetworkID:   opera.VitraTestNetworkID,
 		NetworkName: "Vitra Testnet",
 	}
@@ -28,9 +28,9 @@ var (
 			Name:   "Vitra Testnet",
 			Header: testnetHeader,
 			Hashes: genesis.Hashes{
-				genesisstore.EpochsSection(0): hash.HexToHash("0xadb05046e84460562cdc6fdeec74d049e1df8ea565f75fcc40e7190421144824"),
-				genesisstore.BlocksSection(0): hash.HexToHash("0x3fd216694755896f26f827ca0593b12395b84d44f915524e94ca80a8f3464b9e"),
-				genesisstore.EvmSection(0):    hash.HexToHash("0xee7e5e1d6b00a6cf9e551c78008800551a88e32b4c21552d5a81895297479dbd"),
+				genesisstore.EpochsSection(0): hash.HexToHash("0x071260c77ff4775a72611ed79ee0055a1c5861583e86200d6750675b4740e95f"),
+				genesisstore.BlocksSection(0): hash.HexToHash("0x6feebb87208c21b7c01f8c0b00b8724045bf1f4ed3c6149843aeea1e6c3a3c3c"),
+				genesisstore.EvmSection(0):    hash.HexToHash("0x9a9f886edefcf0a6916c986ce1d4c9ce4318c3d9ecd92ad8075d4bfafab18148"),
 			},
 		},
 
