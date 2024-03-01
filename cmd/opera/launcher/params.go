@@ -12,7 +12,7 @@ import (
 var (
 	Bootnodes = map[string][]string{
 		"Vitra Testnet": {
-			"enode://1098c965495ea2d3c1f4cbc521f41fa0bcc46ffa48ee288c93a34406f4e11c86ea9d58496817fe4a6c0d1c01eaa6d19d17b45cdbdd17243663d8867258e72704@main-node.vitrafoundation-rpc.com:3000",
+			"enode://1098c965495ea2d3c1f4cbc521f41fa0bcc46ffa48ee288c93a34406f4e11c86ea9d58496817fe4a6c0d1c01eaa6d19d17b45cdbdd17243663d8867258e72704@nlb.vitrafoundation-rpc.com:3000",
 		},
 	}
 
