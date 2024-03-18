@@ -218,6 +218,8 @@ func consensusCallbackBeginBlockFn(
 				// Check if empty block should be pruned
 				emptyBlock := confirmedEvents.Len() == 0 && cBlock.Cheaters.Len() == 0
 				skipBlock = skipBlock || (emptyBlock && blockCtx.Time < bs.LastBlock.Time+es.Rules.Blocks.MaxEmptyBlockSkipPeriod)
+
+				log.Debug("Finilize block", "atropos", cBlock.Atropos.String(), "events", confirmedEvents.Len(), "cheaters", cBlock.Cheaters.Len(), "empty", emptyBlock, "degenerate", atroposDegenerate, "skip", skipBlock)
 				// Finalize the progress of eventProcessor
 				bs = eventProcessor.Finalize(blockCtx, skipBlock) // TODO: refactor to not mutate the bs, it is unclear
 				{                                                 // sort and merge MPs cheaters
