@@ -164,7 +164,7 @@ func newVitraNetwork(ctx *cli.Context) error {
 	fmt.Println("Network rules: ", toJson(netrules))
 
 	genesisStore := makevitragenesis.VitraGenesisStoreWithRulesAndStart(
-		futils.ToFtm(200000000),
+		futils.ToFtm(36000000),
 		futils.ToFtm(1000000),
 		netrules,
 		epoch,
