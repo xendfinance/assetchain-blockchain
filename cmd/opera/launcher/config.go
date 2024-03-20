@@ -2,6 +2,7 @@ package launcher
 
 import (
 	"bufio"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"math/big"
@@ -243,6 +244,10 @@ func mayGetGenesisStore(ctx *cli.Context) *genesisstore.Store {
 				NetworkID:   g.NetworkID,
 				NetworkName: g.NetworkName,
 			}
+
+			//	fmt.Println("genesis header", toJsonString(gHeader), "hashes", toJsonString(genesisHashes))
+			//	os.Exit(0)
+
 			for _, allowed := range AllowedOperaGenesis {
 				if allowed.Hashes.Equal(genesisHashes) && allowed.Header.Equal(gHeader) {
 					log.Info("Genesis file is a known preset", "name", allowed.Name)
@@ -259,6 +264,11 @@ func mayGetGenesisStore(ctx *cli.Context) *genesisstore.Store {
 		return genesisStore
 	}
 	return nil
+}
+
+func toJsonString(v interface{}) string {
+	b, _ := json.MarshalIndent(v, "", "  ")
+	return string(b)
 }
 
 func setBootnodes(ctx *cli.Context, urls []string, cfg *node.Config) {

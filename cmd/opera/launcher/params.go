@@ -12,11 +12,11 @@ import (
 var (
 	Bootnodes = map[string][]string{
 		"Vitra Mainnet": {
-			"enode://39e4d8a1f0843cd1977c4baa53806c93bdd5bbae24171ecaca58ed066cd0ac318cfdbf6bf83c6d95ffac5ec72f9877ba658974ea91cc563b488499261bab52d8@nodes-1.vitrachain-rpc.com:3000",
-			"enode://5866ab895e0d563cabc42baa3a68083390ea615771290db125644edbc6df7f824097825778359830dcb9d3668b9112527bad5ace8a05552d60a3536a88401de0@nodes-2.vitrachain-rpc.com:3000",
-			"enode://7a759a8b87f4c93e58fa16f2247036b4c6990583423924d6c099ce54c3303d1926acad9cb8da45ce6c2469c062fca12daa24b41332b9bcd1847a52ce25573f10@nodes-3.vitrachain-rpc.com:3000",
-			"enode://2327bbdf9eb8129fcdcf0e843f0c357ed4a43bfec5af3f5d2cb69083d5b8e6aa363c7384e7c69da1de96b7e3292028d0491cb070287d7c360dea185dc9bf1136@nodes-4.vitrachain-rpc.com:3000",
-			"enode://3ed5c7a1618f3412bbdf2e9e90dba1f0276a3382b384a3a2e586e4373d9f457cf10809bc800f89b20a7ad7dc46d27a4f8d97003d7cdd20558a0a009aec7b29bd@nodes-5.vitrachain-rpc.com:3000",
+			"enode://60792ba55d984a46f0a2ba469089de6ca16dfad812a621944f70248e02208c23ddf8f823fb05c12b5d36964f38d73055a89e32b5d19c90495a10470b60e37512@nodes-1.vitrachain-rpc.com:3000",
+			"enode://9009824396c6c2fbe976481ad07f92d5cb696e59a9a35fb20ef318452ba77e58b3f5d8903062ecc49a4cc6630d6250967e3fd44dec8f1ac2903440018891c164@nodes-2.vitrachain-rpc.com:3000",
+			"enode://56f1707fd0460654840d2ad726e9bafa653cc0b39289a2d838530a44b355b9927ebe7db99222d3a9aed977ad0c193e56e0a774c80f19bae6344dce758f81a6de0@nodes-3.vitrachain-rpc.com:3000",
+			"enode://a9ff87401f8c19715ceaa618ebe0d68e76b82ae57a19d8c792cb25637b7edf8a4e9d9cd933cde47102acc2cb5a6d79dd1d01c162e85a9d4d9dac89f9b4e1bbd1@nodes-4.vitrachain-rpc.com:3000",
+			"enode://da2917206f04de4c1a18d66ebbdc7d1e6c74e892a39762280634dc5c45602c5ce1a325016ec2225fe2eb1957f81602a0b4fa1ac9ccb49d9c600399b4ff3b78a1@nodes-5.vitrachain-rpc.com:3000",
 		},
 
 		"Vitra Testnet": {
@@ -25,7 +25,7 @@ var (
 	}
 
 	mainnetHeader = genesis.Header{
-		GenesisID:   hash.HexToHash("0xe7cf217eba1e5a9fa8c92a85274af7c17bd459a6ac24cc276fff44ca9c66c06d"),
+		GenesisID:   hash.HexToHash("0x6f9e74ee2b3a052d173bb09ef06f5a213569367b454af1a05cdf33a12a8c9e8c"),
 		NetworkID:   opera.VitraMainNetworkID,
 		NetworkName: "Vitra Mainnet",
 	}
@@ -42,9 +42,9 @@ var (
 			Name:   "Vitra Mainnet",
 			Header: mainnetHeader,
 			Hashes: genesis.Hashes{
-				genesisstore.EpochsSection(0): hash.HexToHash("0x194d682fdeb03cc3231a34f75d386084c2d31d28e39c6a87bd4a9ea4ae40c10c"),
-				genesisstore.BlocksSection(0): hash.HexToHash("0xa2417bd77a52b2c0dd60cdae7842060544f6cbb827e3486aab01a9c74cbcc667"),
-				genesisstore.EvmSection(0):    hash.HexToHash("0x637ffdb196159d84a234ee23441263fd9569214361cf05eafc49cbae0cf21cb4"),
+				genesisstore.EpochsSection(0): hash.HexToHash("0xac853075b052427b5247aad8f9c164c48e29acc19b0c27298bc19b1564bc10d1"),
+				genesisstore.BlocksSection(0): hash.HexToHash("0x31537b677879927f57b1c7617331c64ef72fe86d7c8f5f6cdb3c747b7e50261b"),
+				genesisstore.EvmSection(0):    hash.HexToHash("0x0ac3143552e971f7db1a3e4c9ddcaf6ce240bb56bc878e3b6b48a317dc837bec"),
 			},
 		},
 
