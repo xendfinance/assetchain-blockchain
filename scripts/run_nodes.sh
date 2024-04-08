@@ -26,8 +26,6 @@ do
     --http.api=eth,debug,net,admin,web3,personal,txpool,ftm,dag \
     --allow-insecure-unlock \
     --validator.id $ACC \
-    --validator.pubkey ${valPubKeys[$i]} \
-    --validator.password ./pass.txt \
     --verbosity=3 --tracing > ./logs/opera$ACC.log 2>&1)&
 
     sleep 1

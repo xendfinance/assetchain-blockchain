@@ -51,6 +51,7 @@ func XendGenesisStoreWithRulesAndStart(balance, stake *big.Int, rules opera.Rule
 		})
 	}
 
+	// NOTE: each time contracts are changed, their ABIs should be updated
 	// deploy essential contracts
 	// pre deploy NetworkInitializer
 	builder.SetCode(netinit.ContractAddress, netinit.GetContractBin())
