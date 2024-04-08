@@ -36,7 +36,7 @@ import (
 )
 
 var (
-	DefaultMaxGasPrice = big.NewInt(10000000 * params.GWei)
+	DefaultMaxGasPrice = big.NewInt(10_000_000 * params.GWei)
 	DecimalUnitBn      = big.NewInt(DecimalUnit)
 	secondBn           = new(big.Int).SetUint64(uint64(time.Second))
 )

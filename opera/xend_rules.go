@@ -6,17 +6,17 @@ import (
 	"github.com/Fantom-foundation/go-opera/inter"
 )
 
-// VitraMainNetRules returns mainnet rules
-func VitraMainNetRules() Rules {
+// XendMainNetRules returns mainnet rules
+func XendMainNetRules() Rules {
 	return Rules{
-		Name:      "Vitra Mainnet",
-		NetworkID: VitraMainNetworkID,
+		Name:      "Xend Mainnet",
+		NetworkID: XendMainNetworkID,
 		Dag:       DefaultDagRules(),
-		Epochs:    VitraNetEpochsRules(),
+		Epochs:    XendNetEpochsRules(),
 		Economy:   DefaultEconomyRules(),
 		Blocks: BlocksRules{
 			MaxBlockGas:             20500000,
-			MaxEmptyBlockSkipPeriod: inter.Timestamp(10 * time.Second),
+			MaxEmptyBlockSkipPeriod: inter.Timestamp(60 * time.Second),
 		},
 		Upgrades: Upgrades{
 			Berlin: true,
@@ -26,18 +26,18 @@ func VitraMainNetRules() Rules {
 	}
 }
 
-// VitraTestNetRules returns testnet rules
+// XendTestNetRules returns testnet rules
 // equal to mainnet
-func VitraTestNetRules() Rules {
+func XendTestNetRules() Rules {
 	return Rules{
-		Name:      "Vitra Testnet",
-		NetworkID: VitraTestNetworkID,
+		Name:      "Xend Testnet",
+		NetworkID: XendTestNetworkID,
 		Dag:       DefaultDagRules(),
-		Epochs:    VitraNetEpochsRules(),
+		Epochs:    XendNetEpochsRules(),
 		Economy:   DefaultEconomyRules(),
 		Blocks: BlocksRules{
 			MaxBlockGas:             20500000,
-			MaxEmptyBlockSkipPeriod: inter.Timestamp(10 * time.Second),
+			MaxEmptyBlockSkipPeriod: inter.Timestamp(60 * time.Second),
 		},
 		Upgrades: Upgrades{
 			Berlin: true,
@@ -47,17 +47,17 @@ func VitraTestNetRules() Rules {
 	}
 }
 
-// VitraDevNetRules returns devnet rules
-func VitraDevNetRules() Rules {
+// XendDevNetRules returns devnet rules
+func XendDevNetRules() Rules {
 	return Rules{
-		Name:      "Vitra Devnet",
-		NetworkID: VitraDevNetworkID,
+		Name:      "Xend Devnet",
+		NetworkID: XendDevNetworkID,
 		Dag:       DefaultDagRules(),
-		Epochs:    VitraDevEpochsRules(),
+		Epochs:    XendDevEpochsRules(),
 		Economy:   DefaultEconomyRules(),
 		Blocks: BlocksRules{
 			MaxBlockGas:             20500000,
-			MaxEmptyBlockSkipPeriod: inter.Timestamp(3 * time.Second),
+			MaxEmptyBlockSkipPeriod: inter.Timestamp(60 * time.Second),
 		},
 		Upgrades: Upgrades{
 			Berlin: true,
@@ -67,14 +67,14 @@ func VitraDevNetRules() Rules {
 	}
 }
 
-func VitraNetEpochsRules() EpochsRules {
+func XendNetEpochsRules() EpochsRules {
 	cfg := DefaultEpochsRules()
 	cfg.MaxEpochDuration = inter.Timestamp(4 * time.Hour)
 	return cfg
 }
 
-func VitraDevEpochsRules() EpochsRules {
+func XendDevEpochsRules() EpochsRules {
 	cfg := DefaultEpochsRules()
-	cfg.MaxEpochDuration = inter.Timestamp(20 * time.Minute)
+	cfg.MaxEpochDuration = inter.Timestamp(4 * time.Hour)
 	return cfg
 }

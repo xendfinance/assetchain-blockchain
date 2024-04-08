@@ -10,19 +10,21 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/Fantom-foundation/lachesis-base/inter/idx"
+	"github.com/ethereum/go-ethereum/cmd/utils"
+	"github.com/ethereum/go-ethereum/crypto"
+	"gopkg.in/urfave/cli.v1"
+
+	"github.com/Fantom-foundation/go-opera/integration/makexendgenesis"
+
 	"github.com/Fantom-foundation/go-opera/gossip/emitter"
 	"github.com/Fantom-foundation/go-opera/integration"
-	"github.com/Fantom-foundation/go-opera/integration/makevitragenesis"
 	"github.com/Fantom-foundation/go-opera/inter"
 	"github.com/Fantom-foundation/go-opera/inter/validatorpk"
 	"github.com/Fantom-foundation/go-opera/opera"
 	"github.com/Fantom-foundation/go-opera/opera/genesis/gpos"
 	futils "github.com/Fantom-foundation/go-opera/utils"
 	"github.com/Fantom-foundation/go-opera/valkeystore"
-	"github.com/Fantom-foundation/lachesis-base/inter/idx"
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/crypto"
-	"gopkg.in/urfave/cli.v1"
 )
 
 var InitNetCommand = cli.Command{
@@ -34,7 +36,7 @@ var InitNetCommand = cli.Command{
 		{
 			Name:      "new",
 			Usage:     "Create a new network",
-			Action:    utils.MigrateFlags(newVitraNetwork),
+			Action:    utils.MigrateFlags(newXendNetwork),
 			ArgsUsage: "network new <val_num> [flags]",
 			Flags: []cli.Flag{
 				DataDirFlag,
@@ -124,7 +126,7 @@ func ValidatorCreate(ctx *cli.Context, valId int, createTime time.Time) (*gpos.V
 
 }
 
-func newVitraNetwork(ctx *cli.Context) error {
+func newXendNetwork(ctx *cli.Context) error {
 
 	num, err := getValidatorsNum(ctx)
 	if err != nil {
@@ -152,18 +154,18 @@ func newVitraNetwork(ctx *cli.Context) error {
 	nettype := ctx.GlobalString(NetworkTypeFlag.Name)
 	switch nettype {
 	case "mainnet":
-		netrules = opera.VitraMainNetRules()
+		netrules = opera.XendMainNetRules()
 	case "testnet":
-		netrules = opera.VitraTestNetRules()
+		netrules = opera.XendTestNetRules()
 	case "devnet":
-		netrules = opera.VitraDevNetRules()
+		netrules = opera.XendDevNetRules()
 	default:
 		utils.Fatalf("Unknown network type: %s, use mainnet, testnet or devnet", nettype)
 	}
 
 	fmt.Println("Network rules: ", toJson(netrules))
 
-	genesisStore := makevitragenesis.VitraGenesisStoreWithRulesAndStart(
+	genesisStore := makexendgenesis.XendGenesisStoreWithRulesAndStart(
 		futils.ToFtm(36000000),
 		futils.ToFtm(1000000),
 		netrules,
@@ -185,7 +187,7 @@ func newVitraNetwork(ctx *cli.Context) error {
 
 		ctx.GlobalSet(DataDirFlag.Name, fmt.Sprintf("%s%d", origDatadir, val.ID))
 		tmpCfg := makeAllConfigs(ctx)
-		//tmpCfg.Node.DataDir = fmt.Sprintf("%s%d", cfg.Node.DataDir, val.ID)
+		// tmpCfg.Node.DataDir = fmt.Sprintf("%s%d", cfg.Node.DataDir, val.ID)
 
 		tmpCfg.Emitter.Validator = emitter.ValidatorConfig{
 			ID:     val.ID,

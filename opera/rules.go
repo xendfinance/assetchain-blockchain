@@ -23,9 +23,9 @@ const (
 	londonBit              = 1 << 1
 	llrBit                 = 1 << 2
 
-	VitraMainNetworkID = 0x015E // 350
-	VitraTestNetworkID = 0x015F // 351
-	VitraDevNetworkID  = 0x0160 // 352
+	XendMainNetworkID = 0xA5B4 // 42420
+	XendTestNetworkID = 0xA5B5 // 42421
+	XendDevNetworkID  = 0xA5B6 // 42422
 )
 
 var DefaultVMConfig = vm.Config{
