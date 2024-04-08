@@ -59,11 +59,12 @@ func DefaultConfig() Config {
 	return Config{
 		VersionToPublish: params.VersionWithMeta(),
 
+		// NOTE: here we define how fast blocks are formed
 		EmitIntervals: EmitIntervals{
 			Min:                        150 * time.Millisecond,
 			Max:                        10 * time.Minute,
 			Confirming:                 170 * time.Millisecond,
-			DoublesignProtection:       27 * time.Minute, // should be greater than MaxEmitInterval
+			DoublesignProtection:       2 * time.Minute, // should be greater than MaxEmitInterval, TODO: fix before prod
 			ParallelInstanceProtection: 1 * time.Minute,
 		},
 
