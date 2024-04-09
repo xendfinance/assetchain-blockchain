@@ -73,6 +73,7 @@ func ValidatorCreate(ctx *cli.Context, valId int, createTime time.Time) (*gpos.V
 	cfg := makeAllConfigs(ctx)
 	utils.SetNodeConfig(ctx, &cfg.Node)
 
+	// INFO(Mike): if this CLI doesn't work for some reason, password may be read from any source
 	password := getPassPhrase("Your new validator key is locked with a password. Please give a password. Do not forget this password.", true, 0, utils.MakePasswordList(ctx))
 
 	privateKeyECDSA, err := ecdsa.GenerateKey(crypto.S256(), rand.Reader)
@@ -93,8 +94,6 @@ func ValidatorCreate(ctx *cli.Context, valId int, createTime time.Time) (*gpos.V
 	stack := makeConfigNode(ctx, &cfg.Node)
 	coinbase := integration.SetAccountKey(stack.AccountManager(), privateKeyECDSA, password)
 	fmt.Println("Unlocked validator account", "address", coinbase.Address.Hex())
-
-	//
 
 	valKeystore := valkeystore.NewDefaultFileRawKeystore(path.Join(getValKeystoreDir(cfg.Node), "validator"))
 	err = valKeystore.Add(publicKey, privateKey, password)
@@ -123,11 +122,9 @@ func ValidatorCreate(ctx *cli.Context, valId int, createTime time.Time) (*gpos.V
 		DeactivatedEpoch: 0,
 		Status:           0,
 	}, nil
-
 }
 
 func newXendNetwork(ctx *cli.Context) error {
-
 	num, err := getValidatorsNum(ctx)
 	if err != nil {
 		return err
@@ -184,7 +181,6 @@ func newXendNetwork(ctx *cli.Context) error {
 	}
 
 	for _, val := range validators {
-
 		ctx.GlobalSet(DataDirFlag.Name, fmt.Sprintf("%s%d", origDatadir, val.ID))
 		tmpCfg := makeAllConfigs(ctx)
 		// tmpCfg.Node.DataDir = fmt.Sprintf("%s%d", cfg.Node.DataDir, val.ID)
@@ -194,15 +190,15 @@ func newXendNetwork(ctx *cli.Context) error {
 			PubKey: val.PubKey,
 		}
 
-		fmt.Println("make node with config: ", tmpCfg)
+		fmt.Printf("make node with config: %+v", tmpCfg)
 		time.Sleep(5 * time.Second)
 		node, _, nodeCloser := makeNode(ctx, tmpCfg, genesisStore)
 
 		defer nodeCloser()
-		fmt.Printf("Node %s created (validator %d)\n", node.Config().P2P.ListenAddr, val.ID)
+		fmt.Printf("Node %s created (validator %d) %+v\n", node.Config().P2P.ListenAddr, val.ID, val)
 		node.Close()
 		node.Wait()
-		time.Sleep(5 * time.Second)
+		time.Sleep(3 * time.Second)
 	}
 
 	return nil

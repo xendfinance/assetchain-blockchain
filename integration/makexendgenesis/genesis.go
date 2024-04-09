@@ -1,6 +1,7 @@
 package makexendgenesis
 
 import (
+	"log"
 	"math/big"
 	"time"
 
@@ -51,7 +52,6 @@ func XendGenesisStoreWithRulesAndStart(balance, stake *big.Int, rules opera.Rule
 		})
 	}
 
-	// NOTE: each time contracts are changed, their ABIs should be updated
 	// deploy essential contracts
 	// pre deploy NetworkInitializer
 	builder.SetCode(netinit.ContractAddress, netinit.GetContractBin())
@@ -107,7 +107,7 @@ func XendGenesisStoreWithRulesAndStart(balance, stake *big.Int, rules opera.Rule
 	genesisTxs := GetGenesisTxs(epoch-2, validators, builder.TotalSupply(), delegations, owner)
 	err := builder.ExecuteGenesisTxs(blockProc, genesisTxs)
 	if err != nil {
-		panic(err)
+		log.Fatalf("ERROR WHILE INITING GENESIS BLOCK: %+v", err)
 	}
 
 	return builder.Build(genesis.Header{

@@ -1,5 +1,7 @@
 # MacOS
 .DS_Store
+*.txt
+*/.prettierd/
 
 # IDE
 .vscode

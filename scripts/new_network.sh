@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-validutorsNum=5
+validutorsNum=3
 
 ../build/opera \
 network new $validutorsNum \
@@ -8,3 +8,5 @@ network new $validutorsNum \
 --password ./pass.txt \
 --validatorsfile ./validators.txt \
 --network.type devnet
+
+../build/opera --datadir ./datadir/datadir_opera1 export genesis genesis.g
