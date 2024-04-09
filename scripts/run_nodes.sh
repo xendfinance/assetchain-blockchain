@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 IFS=$'\n' read -d '' -r -a valPubKeys < ./validators.txt
-
 N=${#valPubKeys[@]}
+
+alias opera="../build/opera"
 
 echo "$N validators"
 
