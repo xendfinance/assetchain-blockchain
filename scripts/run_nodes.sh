@@ -2,6 +2,11 @@
 
 IFS=$'\n' read -d '' -r -a valPubKeys < ./validators.txt
 N=${#valPubKeys[@]}
+LISTEN_ADDR="0.0.0.0"
+
+if [[ "$OSTYPE" =~ i?darwin ]]; then
+	LISTEN_ADDR="127.0.0.1"
+fi
 
 alias opera="../build/opera"
 
@@ -22,7 +27,7 @@ do
     --genesis ./genesis.g \
     --datadir ./datadir/datadir_opera$ACC \
     --port $((4000+$ACC)) \
-    --http --http.addr=127.0.0.1 \
+    --http --http.addr="$LISTEN_ADDR" \
     --http.port $((4100+$ACC)) --http.corsdomain=* --http.vhosts=* \
     --http.api=eth,debug,net,admin,web3,personal,txpool,ftm,dag \
     --allow-insecure-unlock \
@@ -72,6 +77,9 @@ do
     DATADIRi=./datadir/datadir_opera$ACCi
     enode=$(attach_and_exec $DATADIRi 'admin.nodeInfo.enode')
     echo "    p2p address = ${enode}"
+    echo "${enode}," >> p2p_addrs.txt
+	../build/opera --datadir ${DATADIRi} dumpconfig  2> /dev/null > node_config_"${DATADIRi}".toml
+
 
     # connect to next 3 nodes
     for ((j=$(($i+1));j<$(($i+1+3));j+=1))
@@ -90,4 +98,13 @@ do
         res=$(attach_and_exec $DATADIRj "${cmd}")
         echo "    result = ${res}"
     done
+done
+
+echo "IPC" >> p2p_addrs.txt
+
+for ((i = 0; i < $N; i++))
+do
+    ACCi=$(($i+1))
+    DATADIRi=./datadir/datadir_opera$ACCi
+    echo "$DATADIRi/opera.ipc" >> p2p_addrs.txt
 done
