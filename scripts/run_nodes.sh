@@ -20,17 +20,21 @@ do
     --genesis.allowExperimental \
     --genesis ./genesis.g \
     --datadir ./datadir/datadir_opera$ACC \
-    --port $((2999+$ACC)) \
+    --port $((4000+$ACC)) \
     --http --http.addr=127.0.0.1 \
-    --http.port $((3999+$ACC)) --http.corsdomain=* --http.vhosts=* \
+    --http.port $((4100+$ACC)) --http.corsdomain=* --http.vhosts=* \
     --http.api=eth,debug,net,admin,web3,personal,txpool,ftm,dag \
     --allow-insecure-unlock \
     --validator.id $ACC \
+    --validator.pubkey ${valPubKeys[$i]} \
+    --validator.password ./pass.txt \
     --verbosity=3 --tracing > ./logs/opera$ACC.log 2>&1)&
 
     sleep 1
 
 done
+
+sleep 10
 
 # ececuting command on node function
 attach_and_exec() {
