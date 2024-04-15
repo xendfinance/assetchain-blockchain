@@ -40,7 +40,6 @@ func (d DevnullContainer) Error() error {
 }
 
 func (d DevnullContainer) Reset() {
-
 }
 
 func (d DevnullContainer) Size() uint64 {

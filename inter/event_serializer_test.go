@@ -241,7 +241,7 @@ func TestEventRPCMarshaling(t *testing.T) {
 	t.Run("EventPayload", func(t *testing.T) {
 		require := require.New(t)
 		for i := 0; i < 3; i++ {
-			var event0 = FakeEvent(i, i, i, i != 0)
+			event0 := FakeEvent(i, i, i, i != 0)
 			mapping, err := RPCMarshalEventPayload(event0, true, false)
 			require.NoError(err)
 			bb, err := json.Marshal(mapping)
@@ -368,7 +368,7 @@ func FakeEvent(txsNum, mpsNum, bvsNum int, ersNum bool) *EventPayload {
 		// MPs are serialized with RLP, so no need to test extensively
 		mps = append(mps, MisbehaviourProof{
 			EventsDoublesign: &EventsDoublesign{
-				Pair: [2]SignedEventLocator{SignedEventLocator{}, SignedEventLocator{}},
+				Pair: [2]SignedEventLocator{{}, {}},
 			},
 			BlockVoteDoublesign: nil,
 			WrongBlockVote:      nil,

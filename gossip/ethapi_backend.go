@@ -478,6 +478,7 @@ func (b *EthAPIBackend) CurrentEpoch(ctx context.Context) idx.Epoch {
 func (b *EthAPIBackend) MinGasPrice() *big.Int {
 	return b.state.MinGasPrice()
 }
+
 func (b *EthAPIBackend) MaxGasLimit() uint64 {
 	return b.state.MaxGasLimit()
 }

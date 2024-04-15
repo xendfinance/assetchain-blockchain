@@ -22,10 +22,8 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 )
 
-var (
-	// ErrNoGenesis is returned when there is no Genesis Block.
-	ErrNoGenesis = errors.New("genesis not found in chain")
-)
+// ErrNoGenesis is returned when there is no Genesis Block.
+var ErrNoGenesis = errors.New("genesis not found in chain")
 
 // List of evm-call-message pre-checking errors. All state transition messages will
 // be pre-checked before execution. If any invalidation detected, the corresponding

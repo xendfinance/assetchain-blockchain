@@ -96,7 +96,6 @@ func TestMedianTimeOnIndex(t *testing.T) {
 		vi.SetHighestBefore(e, before)
 		assertar.Equal(inter.Timestamp(12), vi.MedianTime(e, 1))
 	}
-
 }
 
 func TestMedianTimeOnDAG(t *testing.T) {

@@ -77,7 +77,7 @@ func TestI64(t *testing.T) {
 func TestPaddedBytes(t *testing.T) {
 	require := require.New(t)
 
-	var data = []struct {
+	data := []struct {
 		In  []byte
 		N   int
 		Exp []byte

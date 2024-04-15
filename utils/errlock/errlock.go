@@ -17,9 +17,7 @@ func Check() {
 	}
 }
 
-var (
-	datadir string
-)
+var datadir string
 
 // SetDefaultDatadir for errlock files
 func SetDefaultDatadir(dir string) {
@@ -70,5 +68,5 @@ func read(dir string) (bool, string, string, error) {
 func write(dir string, eLockStr string) (string, error) {
 	eLockPath := path.Join(dir, "errlock")
 
-	return eLockPath, ioutil.WriteFile(eLockPath, []byte(eLockStr), 0666) // assume no custom encoding needed
+	return eLockPath, ioutil.WriteFile(eLockPath, []byte(eLockStr), 0o666) // assume no custom encoding needed
 }

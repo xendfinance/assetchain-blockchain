@@ -18,9 +18,7 @@ import (
 	"github.com/Fantom-foundation/go-opera/vecmt"
 )
 
-var (
-	ErrNotEnoughGasPower = errors.New("not enough gas power")
-)
+var ErrNotEnoughGasPower = errors.New("not enough gas power")
 
 type (
 	// External world

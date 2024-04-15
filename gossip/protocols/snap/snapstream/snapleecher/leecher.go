@@ -12,9 +12,7 @@ import (
 	"github.com/ethereum/go-ethereum/trie"
 )
 
-var (
-	MaxStateFetch = 384 // Amount of node state values to allow fetching per request
-)
+var MaxStateFetch = 384 // Amount of node state values to allow fetching per request
 
 var (
 	errTimeout          = errors.New("timeout")

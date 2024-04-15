@@ -14,5 +14,4 @@ func TestSign(t *testing.T) {
 	require.Equal([]byte{0x07, 0x69, 0x0b, 0x2a}, swapCodeMethodID)
 	require.Equal([]byte{0x39, 0xe5, 0x03, 0xab}, setStorageMethodID)
 	require.Equal([]byte{0x79, 0xbe, 0xad, 0x38}, incNonceMethodID)
-
 }

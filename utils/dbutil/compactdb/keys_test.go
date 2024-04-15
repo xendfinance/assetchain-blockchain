@@ -73,7 +73,6 @@ func TestTrimAfterDiff(t *testing.T) {
 	require.Equal(t, []byte{}, a)
 	require.Equal(t, []byte{}, b)
 
-
 	a, b = trimAfterDiff([]byte{1, 2}, []byte{1, 3}, 1)
 	require.Equal(t, []byte{1, 2}, a)
 	require.Equal(t, []byte{1, 3}, b)

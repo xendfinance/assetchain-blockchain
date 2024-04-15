@@ -12,8 +12,7 @@ import (
 	"github.com/Fantom-foundation/go-opera/inter"
 )
 
-var (
-	testASCIIScheme = `
+var testASCIIScheme = `
 a1.0   b1.0   c1.0   d1.0   e1.0
 ║      ║      ║      ║      ║
 ║      ╠──────╫───── d2.0   ║
@@ -30,7 +29,6 @@ a2.1 ──╣      ║      ║      ║
 ║      ╠───── c2.2   ║      e3.2
 ║      ║      ║      ║      ║
 `
-)
 
 type eventWithCreationTime struct {
 	dag.Event

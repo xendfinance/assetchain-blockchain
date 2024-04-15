@@ -37,7 +37,6 @@ var (
 	}
 
 	AllowedOperaGenesis = []GenesisTemplate{
-
 		{
 			Name:   "Xend Mainnet",
 			Header: mainnetHeader,

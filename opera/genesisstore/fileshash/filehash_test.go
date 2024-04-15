@@ -27,7 +27,6 @@ func (f dropableFile) Drop() error {
 }
 
 func TestFileHash_ReadWrite(t *testing.T) {
-
 	const (
 		FILE_CONTENT = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 			Nunc finibus ultricies interdum. Nulla porttitor arcu a tincidunt mollis. Aliquam erat volutpat. 
@@ -99,7 +98,7 @@ func testFileHash_ReadWrite(t *testing.T, content []byte, expRoot hash.Hash, pie
 
 	// normal case: correct root hash and content after reading file partially
 	if len(content) > 0 {
-		f, err = os.OpenFile(filePath, os.O_RDONLY, 0600)
+		f, err = os.OpenFile(filePath, os.O_RDONLY, 0o600)
 		require.NoError(err)
 		reader := WrapReader(f, maxMemUsage, root)
 		readB := make([]byte, rand.Int63n(int64(len(content))))
@@ -111,7 +110,7 @@ func testFileHash_ReadWrite(t *testing.T, content []byte, expRoot hash.Hash, pie
 
 	// normal case: correct root hash and content after reading the whole file
 	{
-		f, err = os.OpenFile(filePath, os.O_RDONLY, 0600)
+		f, err = os.OpenFile(filePath, os.O_RDONLY, 0o600)
 		require.NoError(err)
 		reader := WrapReader(f, maxMemUsage, root)
 		readB := make([]byte, len(content))
@@ -125,7 +124,7 @@ func testFileHash_ReadWrite(t *testing.T, content []byte, expRoot hash.Hash, pie
 
 	// correct root hash and reading too much content
 	{
-		f, err = os.OpenFile(filePath, os.O_RDONLY, 0600)
+		f, err = os.OpenFile(filePath, os.O_RDONLY, 0o600)
 		require.NoError(err)
 		reader := WrapReader(f, maxMemUsage, root)
 		readB := make([]byte, len(content)+1)
@@ -135,7 +134,7 @@ func testFileHash_ReadWrite(t *testing.T, content []byte, expRoot hash.Hash, pie
 
 	// passing the wrong root hash to reader
 	{
-		f, err = os.OpenFile(filePath, os.O_RDONLY, 0600)
+		f, err = os.OpenFile(filePath, os.O_RDONLY, 0o600)
 		require.NoError(err)
 		maliciousReader := WrapReader(f, maxMemUsage, hash.HexToHash("0x00"))
 		data := make([]byte, 1)
@@ -148,7 +147,7 @@ func testFileHash_ReadWrite(t *testing.T, content []byte, expRoot hash.Hash, pie
 	headerOffset := 4 + 8 + getPiecesNum(uint64(len(content)), pieceSize)*32
 	if len(content) > 0 {
 		// mutate content byte
-		f, err = os.OpenFile(filePath, os.O_RDWR, 0600)
+		f, err = os.OpenFile(filePath, os.O_RDWR, 0o600)
 		require.NoError(err)
 		s := []byte{0}
 		contentPos := rand.Int63n(int64(len(content)))
@@ -161,7 +160,7 @@ func testFileHash_ReadWrite(t *testing.T, content []byte, expRoot hash.Hash, pie
 		require.NoError(f.Close())
 
 		// try to read
-		f, err = os.OpenFile(filePath, os.O_RDONLY, 0600)
+		f, err = os.OpenFile(filePath, os.O_RDONLY, 0o600)
 		maliciousReader := WrapReader(f, maxMemUsage, root)
 		data := make([]byte, contentPos+1)
 		err = ioread.ReadAll(maliciousReader, data)
@@ -170,7 +169,7 @@ func testFileHash_ReadWrite(t *testing.T, content []byte, expRoot hash.Hash, pie
 
 		// restore
 		s[0]--
-		f, err = os.OpenFile(filePath, os.O_RDWR, 0600)
+		f, err = os.OpenFile(filePath, os.O_RDWR, 0o600)
 		require.NoError(err)
 		_, err = f.WriteAt(s, pos)
 		require.NoError(err)
@@ -180,7 +179,7 @@ func testFileHash_ReadWrite(t *testing.T, content []byte, expRoot hash.Hash, pie
 	// modify a piece hash in file to make the wrong one
 	{
 		// mutate content byte
-		f, err = os.OpenFile(filePath, os.O_RDWR, 0600)
+		f, err = os.OpenFile(filePath, os.O_RDWR, 0o600)
 		require.NoError(err)
 		pos := rand.Int63n(int64(headerOffset))
 		s := []byte{0}
@@ -192,7 +191,7 @@ func testFileHash_ReadWrite(t *testing.T, content []byte, expRoot hash.Hash, pie
 		require.NoError(f.Close())
 
 		// try to read
-		f, err = os.OpenFile(filePath, os.O_RDONLY, 0600)
+		f, err = os.OpenFile(filePath, os.O_RDONLY, 0o600)
 		maliciousReader := WrapReader(f, maxMemUsage*2, root)
 		data := make([]byte, 1)
 		err = ioread.ReadAll(maliciousReader, data)
@@ -201,7 +200,7 @@ func testFileHash_ReadWrite(t *testing.T, content []byte, expRoot hash.Hash, pie
 
 		// restore
 		s[0]--
-		f, err = os.OpenFile(filePath, os.O_RDWR, 0600)
+		f, err = os.OpenFile(filePath, os.O_RDWR, 0o600)
 		require.NoError(err)
 		_, err = f.WriteAt(s, pos)
 		require.NoError(err)
@@ -210,7 +209,7 @@ func testFileHash_ReadWrite(t *testing.T, content []byte, expRoot hash.Hash, pie
 
 	// hashed file requires too much memory
 	{
-		f, err = os.OpenFile(filePath, os.O_WRONLY, 0600)
+		f, err = os.OpenFile(filePath, os.O_WRONLY, 0o600)
 		require.NoError(err)
 		oomReader := WrapReader(f, maxMemUsage-1, root)
 		data := make([]byte, 1)

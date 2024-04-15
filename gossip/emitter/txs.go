@@ -60,7 +60,7 @@ func (em *Emitter) maxGasPowerToUse(e *inter.MutableEventPayload) uint64 {
 			newGasPowerLeft = gasPowerLeft - maxGasToUse
 		}
 
-		var x1, x2 = newGasPowerLeft, gasPowerLeft
+		x1, x2 := newGasPowerLeft, gasPowerLeft
 		if x1 < downThreshold {
 			x1 = downThreshold
 		}

@@ -9,7 +9,7 @@ import (
 )
 
 func OpenFile(path string, isSyncMode bool) *os.File {
-	const dirPerm = 0700
+	const dirPerm = 0o700
 	if err := os.MkdirAll(filepath.Dir(path), dirPerm); err != nil {
 		log.Crit("Failed to create file dir", "file", path, "err", err)
 	}
@@ -17,7 +17,7 @@ func OpenFile(path string, isSyncMode bool) *os.File {
 	if isSyncMode {
 		sync = os.O_SYNC
 	}
-	fh, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|sync, 0666)
+	fh, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|sync, 0o666)
 	if err != nil {
 		log.Crit("Failed to open file", "file", path, "err", err)
 	}

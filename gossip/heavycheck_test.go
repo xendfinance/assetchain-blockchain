@@ -49,7 +49,6 @@ func (s *LLRHeavyCheckTestSuite) TearDownSuite() {
 }
 
 func (s *LLRHeavyCheckTestSuite) TestHeavyCheckValidateEV() {
-
 	var ev inter.LlrSignedEpochVote
 
 	testCases := []struct {
@@ -200,7 +199,6 @@ func (s *LLRHeavyCheckTestSuite) TestHeavyCheckValidateEV() {
 			}
 		})
 	}
-
 }
 
 func (s *LLRHeavyCheckTestSuite) TestHeavyCheckValidateBVs() {
@@ -463,7 +461,6 @@ func mutableEventPayloadFromImmutable(e *inter.EventPayload) *inter.MutableEvent
 }
 
 func (s *LLRHeavyCheckTestSuite) TestHeavyCheckValidateEvent() {
-
 	testCases := []struct {
 		name    string
 		errExp  error

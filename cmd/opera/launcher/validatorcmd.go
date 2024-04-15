@@ -17,12 +17,11 @@ import (
 	"github.com/Fantom-foundation/go-opera/valkeystore/encryption"
 )
 
-var (
-	validatorCommand = cli.Command{
-		Name:     "validator",
-		Usage:    "Manage validators",
-		Category: "VALIDATOR COMMANDS",
-		Description: `
+var validatorCommand = cli.Command{
+	Name:     "validator",
+	Usage:    "Manage validators",
+	Category: "VALIDATOR COMMANDS",
+	Description: `
 
 Create a new validator private key.
 
@@ -41,17 +40,17 @@ It is safe to transfer the entire directory or the individual keys therein
 between Opera nodes by simply copying.
 
 Make sure you backup your keys regularly.`,
-		Subcommands: []cli.Command{
-			{
-				Name:   "new",
-				Usage:  "Create a new validator key",
-				Action: utils.MigrateFlags(validatorKeyCreate),
-				Flags: []cli.Flag{
-					DataDirFlag,
-					utils.KeyStoreDirFlag,
-					utils.PasswordFileFlag,
-				},
-				Description: `
+	Subcommands: []cli.Command{
+		{
+			Name:   "new",
+			Usage:  "Create a new validator key",
+			Action: utils.MigrateFlags(validatorKeyCreate),
+			Flags: []cli.Flag{
+				DataDirFlag,
+				utils.KeyStoreDirFlag,
+				utils.PasswordFileFlag,
+			},
+			Description: `
     opera validator new
 
 Creates a new validator private key and prints the public key.
@@ -65,25 +64,24 @@ For non-interactive use the passphrase can be specified with the --validator.pas
 Note, this is meant to be used for testing only, it is a bad idea to save your
 password to file or expose in any other way.
 `,
+		},
+		{
+			Name:   "convert",
+			Usage:  "Convert an account key to a validator key",
+			Action: utils.MigrateFlags(validatorKeyConvert),
+			Flags: []cli.Flag{
+				DataDirFlag,
+				utils.KeyStoreDirFlag,
 			},
-			{
-				Name:   "convert",
-				Usage:  "Convert an account key to a validator key",
-				Action: utils.MigrateFlags(validatorKeyConvert),
-				Flags: []cli.Flag{
-					DataDirFlag,
-					utils.KeyStoreDirFlag,
-				},
-				ArgsUsage: "<account address> <validator pubkey>",
-				Description: `
+			ArgsUsage: "<account address> <validator pubkey>",
+			Description: `
     opera validator convert
 
 Converts an account private key to a validator private key and saves in the validator keystore.
 `,
-			},
 		},
-	}
-)
+	},
+}
 
 // validatorKeyCreate creates a new validator key into the keystore defined by the CLI flags.
 func validatorKeyCreate(ctx *cli.Context) error {

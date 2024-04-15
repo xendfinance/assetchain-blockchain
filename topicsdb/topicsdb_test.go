@@ -42,23 +42,24 @@ func TestIndexSearchMultyVariants(t *testing.T) {
 		addr3 = randAddress()
 		addr4 = randAddress()
 	)
-	testdata := []*types.Log{{
-		BlockNumber: 1,
-		Address:     addr1,
-		Topics:      []common.Hash{hash1, hash1, hash1},
-	}, {
-		BlockNumber: 3,
-		Address:     addr2,
-		Topics:      []common.Hash{hash2, hash2, hash2},
-	}, {
-		BlockNumber: 998,
-		Address:     addr3,
-		Topics:      []common.Hash{hash3, hash3, hash3},
-	}, {
-		BlockNumber: 999,
-		Address:     addr4,
-		Topics:      []common.Hash{hash4, hash4, hash4},
-	},
+	testdata := []*types.Log{
+		{
+			BlockNumber: 1,
+			Address:     addr1,
+			Topics:      []common.Hash{hash1, hash1, hash1},
+		}, {
+			BlockNumber: 3,
+			Address:     addr2,
+			Topics:      []common.Hash{hash2, hash2, hash2},
+		}, {
+			BlockNumber: 998,
+			Address:     addr3,
+			Topics:      []common.Hash{hash3, hash3, hash3},
+		}, {
+			BlockNumber: 999,
+			Address:     addr4,
+			Topics:      []common.Hash{hash4, hash4, hash4},
+		},
 	}
 
 	index := newTestIndex()
@@ -90,7 +91,6 @@ func TestIndexSearchMultyVariants(t *testing.T) {
 		"pooled": pooled.FindInBlocks,
 	} {
 		t.Run(dsc, func(t *testing.T) {
-
 			t.Run("With no addresses", func(t *testing.T) {
 				require := require.New(t)
 				got, err := method(nil, 0, 1000, [][]common.Hash{
@@ -152,7 +152,6 @@ func TestIndexSearchMultyVariants(t *testing.T) {
 				require.NoError(err)
 				require.ElementsMatch(got1, got2)
 			})
-
 		})
 	}
 }
@@ -167,23 +166,24 @@ func TestIndexSearchShortCircuits(t *testing.T) {
 		addr1 = randAddress()
 		addr2 = randAddress()
 	)
-	testdata := []*types.Log{{
-		BlockNumber: 1,
-		Address:     addr1,
-		Topics:      []common.Hash{hash1, hash2},
-	}, {
-		BlockNumber: 3,
-		Address:     addr1,
-		Topics:      []common.Hash{hash1, hash2, hash3},
-	}, {
-		BlockNumber: 998,
-		Address:     addr2,
-		Topics:      []common.Hash{hash1, hash2, hash4},
-	}, {
-		BlockNumber: 999,
-		Address:     addr1,
-		Topics:      []common.Hash{hash1, hash2, hash4},
-	},
+	testdata := []*types.Log{
+		{
+			BlockNumber: 1,
+			Address:     addr1,
+			Topics:      []common.Hash{hash1, hash2},
+		}, {
+			BlockNumber: 3,
+			Address:     addr1,
+			Topics:      []common.Hash{hash1, hash2, hash3},
+		}, {
+			BlockNumber: 998,
+			Address:     addr2,
+			Topics:      []common.Hash{hash1, hash2, hash4},
+		}, {
+			BlockNumber: 999,
+			Address:     addr1,
+			Topics:      []common.Hash{hash1, hash2, hash4},
+		},
 	}
 
 	index := newTestIndex()
@@ -200,7 +200,6 @@ func TestIndexSearchShortCircuits(t *testing.T) {
 		"pooled": pooled.FindInBlocks,
 	} {
 		t.Run(dsc, func(t *testing.T) {
-
 			t.Run("topics count 1", func(t *testing.T) {
 				require := require.New(t)
 				got, err := method(nil, 0, 1000, [][]common.Hash{
@@ -236,7 +235,6 @@ func TestIndexSearchShortCircuits(t *testing.T) {
 				require.NoError(err)
 				require.Equal(1, len(got))
 			})
-
 		})
 	}
 }
@@ -284,7 +282,6 @@ func TestIndexSearchSingleVariant(t *testing.T) {
 
 				require.ElementsMatchf(expect, got, "step %d", i)
 			}
-
 		})
 	}
 }
@@ -299,23 +296,24 @@ func TestIndexSearchSimple(t *testing.T) {
 		hash4 = common.BytesToHash([]byte("topic4"))
 		addr  = randAddress()
 	)
-	testdata := []*types.Log{{
-		BlockNumber: 1,
-		Address:     addr,
-		Topics:      []common.Hash{hash1},
-	}, {
-		BlockNumber: 2,
-		Address:     addr,
-		Topics:      []common.Hash{hash2},
-	}, {
-		BlockNumber: 998,
-		Address:     addr,
-		Topics:      []common.Hash{hash3},
-	}, {
-		BlockNumber: 999,
-		Address:     addr,
-		Topics:      []common.Hash{hash4},
-	},
+	testdata := []*types.Log{
+		{
+			BlockNumber: 1,
+			Address:     addr,
+			Topics:      []common.Hash{hash1},
+		}, {
+			BlockNumber: 2,
+			Address:     addr,
+			Topics:      []common.Hash{hash2},
+		}, {
+			BlockNumber: 998,
+			Address:     addr,
+			Topics:      []common.Hash{hash3},
+		}, {
+			BlockNumber: 999,
+			Address:     addr,
+			Topics:      []common.Hash{hash4},
+		},
 	}
 
 	index := newTestIndex()
@@ -361,7 +359,6 @@ func TestIndexSearchSimple(t *testing.T) {
 			require.Equal(1, len(got))
 		})
 	}
-
 }
 
 func TestMaxTopicsCount(t *testing.T) {
@@ -419,22 +416,26 @@ func TestPatternLimit(t *testing.T) {
 			err:     ErrEmptyTopics,
 		},
 		{
-			pattern: [][]common.Hash{[]common.Hash{}, []common.Hash{}, []common.Hash{}},
-			exp:     [][]common.Hash{[]common.Hash{}, []common.Hash{}, []common.Hash{}},
+			pattern: [][]common.Hash{{}, {}, {}},
+			exp:     [][]common.Hash{{}, {}, {}},
 			err:     ErrEmptyTopics,
 		},
 		{
 			pattern: [][]common.Hash{
-				[]common.Hash{hash.FakeHash(1), hash.FakeHash(1)}, []common.Hash{hash.FakeHash(2), hash.FakeHash(2)}, []common.Hash{hash.FakeHash(3), hash.FakeHash(4)}},
+				{hash.FakeHash(1), hash.FakeHash(1)}, {hash.FakeHash(2), hash.FakeHash(2)}, {hash.FakeHash(3), hash.FakeHash(4)},
+			},
 			exp: [][]common.Hash{
-				[]common.Hash{hash.FakeHash(1)}, []common.Hash{hash.FakeHash(2)}, []common.Hash{hash.FakeHash(3), hash.FakeHash(4)}},
+				{hash.FakeHash(1)}, {hash.FakeHash(2)}, {hash.FakeHash(3), hash.FakeHash(4)},
+			},
 			err: nil,
 		},
 		{
 			pattern: [][]common.Hash{
-				[]common.Hash{hash.FakeHash(1), hash.FakeHash(2)}, []common.Hash{hash.FakeHash(3), hash.FakeHash(4)}, []common.Hash{hash.FakeHash(5), hash.FakeHash(6)}},
+				{hash.FakeHash(1), hash.FakeHash(2)}, {hash.FakeHash(3), hash.FakeHash(4)}, {hash.FakeHash(5), hash.FakeHash(6)},
+			},
 			exp: [][]common.Hash{
-				[]common.Hash{hash.FakeHash(1), hash.FakeHash(2)}, []common.Hash{hash.FakeHash(3), hash.FakeHash(4)}, []common.Hash{hash.FakeHash(5), hash.FakeHash(6)}},
+				{hash.FakeHash(1), hash.FakeHash(2)}, {hash.FakeHash(3), hash.FakeHash(4)}, {hash.FakeHash(5), hash.FakeHash(6)},
+			},
 			err: nil,
 		},
 		{
@@ -500,7 +501,6 @@ func TestKvdbThreadsPoolLimit(t *testing.T) {
 				require.Equal(0, len(got))
 
 			}
-
 		})
 	}
 }

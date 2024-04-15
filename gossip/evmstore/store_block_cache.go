@@ -17,7 +17,7 @@ func (s *Store) GetCachedEvmBlock(n idx.Block) *evmcore.EvmBlock {
 }
 
 func (s *Store) SetCachedEvmBlock(n idx.Block, b *evmcore.EvmBlock) {
-	var empty = common.Hash{}
+	empty := common.Hash{}
 	if b.EvmHeader.TxHash == empty {
 		panic("You have to cache only completed blocks (with txs)")
 	}

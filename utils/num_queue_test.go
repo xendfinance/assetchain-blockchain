@@ -9,7 +9,6 @@ import (
 )
 
 func TestNumQueue(t *testing.T) {
-
 	t.Run("Simple", func(t *testing.T) {
 		N := uint64(100)
 		q := NewNumQueue(0)
@@ -42,7 +41,6 @@ func TestNumQueue(t *testing.T) {
 					close(output)
 				}
 				q.Done(n)
-
 			}(uint64(n + 1))
 		}
 

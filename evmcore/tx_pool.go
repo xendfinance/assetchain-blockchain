@@ -924,7 +924,7 @@ func (pool *TxPool) addTxs(txs []*types.Transaction, local, sync bool) []error {
 		}
 	}
 
-	var nilSlot = 0
+	nilSlot := 0
 	for _, err := range newErrs {
 		for errs[nilSlot] != nil {
 			nilSlot++

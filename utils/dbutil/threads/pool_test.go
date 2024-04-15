@@ -15,10 +15,9 @@ func TestMain(m *testing.M) {
 }
 
 func TestThreadPool(t *testing.T) {
-
 	for name, pool := range map[string]ThreadPool{
 		"global": GlobalPool,
-		"local":  ThreadPool{},
+		"local":  {},
 	} {
 		t.Run(name, func(t *testing.T) {
 			require := require.New(t)

@@ -386,9 +386,7 @@ func (env *testEnv) incNonce(account common.Address) {
  * bind.ContractCaller interface
  */
 
-var (
-	errBlockNumberUnsupported = errors.New("simulatedBackend cannot access blocks other than the latest block")
-)
+var errBlockNumberUnsupported = errors.New("simulatedBackend cannot access blocks other than the latest block")
 
 // CodeAt returns the code of the given account. This is needed to differentiate
 // between contract internal errors and the local chain being out of sync.

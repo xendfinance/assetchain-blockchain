@@ -155,7 +155,7 @@ func (g *GossipStoreAdapter) GetEvent(id hash.Event) dag.Event {
 func MakeDBDirs(chaindataDir string) {
 	dbs, _ := SupportedDBs(chaindataDir, DBsCacheConfig{})
 	for typ := range dbs {
-		if err := os.MkdirAll(path.Join(chaindataDir, string(typ)), 0700); err != nil {
+		if err := os.MkdirAll(path.Join(chaindataDir, string(typ)), 0o700); err != nil {
 			utils.Fatalf("Failed to create chaindata/leveldb directory: %v", err)
 		}
 	}

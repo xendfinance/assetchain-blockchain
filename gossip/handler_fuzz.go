@@ -29,9 +29,7 @@ const (
 	fuzzNoMatter int = 0  // otherwise.
 )
 
-var (
-	fuzzedHandler *handler
-)
+var fuzzedHandler *handler
 
 func FuzzHandler(data []byte) int {
 	var err error
