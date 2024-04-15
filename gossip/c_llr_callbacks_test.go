@@ -50,7 +50,7 @@ func (s *IntegrationTestSuite) SetupTest() {
 		startEpoch    = 1
 	)
 
-	//creating generator and processor
+	// creating generator and processor
 	generator := newTestEnv(startEpoch, validatorsNum)
 	processor := newTestEnv(startEpoch, validatorsNum)
 
@@ -572,7 +572,8 @@ func (r repeater) compareLogsByFilterCriteria() {
 		pretest func()
 		success bool
 	}{
-		{"single valid address",
+		{
+			"single valid address",
 			func() {
 				crit = filters.FilterCriteria{
 					FromBlock: big.NewInt(int64(blockNumber)),
@@ -582,7 +583,8 @@ func (r repeater) compareLogsByFilterCriteria() {
 			},
 			true,
 		},
-		{"single invalid address",
+		{
+			"single invalid address",
 			func() {
 				invalidAddr := common.BytesToAddress([]byte("invalid address"))
 				crit = filters.FilterCriteria{
@@ -593,7 +595,8 @@ func (r repeater) compareLogsByFilterCriteria() {
 			},
 			false,
 		},
-		{"invalid block range",
+		{
+			"invalid block range",
 			func() {
 				crit = filters.FilterCriteria{
 					FromBlock: big.NewInt(int64(blockNumber) + 1),
@@ -603,20 +606,23 @@ func (r repeater) compareLogsByFilterCriteria() {
 			},
 			false,
 		},
-		{"block range 1-1000",
+		{
+			"block range 1-1000",
 			func() {
 				crit = defaultCrit
 			},
 			true,
 		},
-		{"block range 1-1000 and first topic",
+		{
+			"block range 1-1000 and first topic",
 			func() {
 				crit = defaultCrit
 				crit.Topics = [][]common.Hash{{firstTopic}}
 			},
 			true,
 		},
-		{"block range 1-1000 and random topic",
+		{
+			"block range 1-1000 and random topic",
 			func() {
 				randomTopic := fetchRandomTopicFromLogs(defaultLogs)
 				crit = defaultCrit
@@ -624,14 +630,16 @@ func (r repeater) compareLogsByFilterCriteria() {
 			},
 			true,
 		},
-		{"block range 1-1000 and first address",
+		{
+			"block range 1-1000 and first address",
 			func() {
 				crit = defaultCrit
 				crit.Addresses = []common.Address{firstAddr}
 			},
 			true,
 		},
-		{"block range 1-1000 and random address",
+		{
+			"block range 1-1000 and random address",
 			func() {
 				randomAddress := fetchRandomAddrFromLogs(defaultLogs)
 				crit = defaultCrit
@@ -639,7 +647,8 @@ func (r repeater) compareLogsByFilterCriteria() {
 			},
 			true,
 		},
-		{"block range 1 to lastBlockNumber",
+		{
+			"block range 1 to lastBlockNumber",
 			func() {
 				crit = filters.FilterCriteria{
 					FromBlock: big.NewInt(int64(1)),
@@ -648,7 +657,8 @@ func (r repeater) compareLogsByFilterCriteria() {
 			},
 			true,
 		},
-		{"block range 1 to lastBlockNumber and last topic",
+		{
+			"block range 1 to lastBlockNumber and last topic",
 			func() {
 				crit = filters.FilterCriteria{
 					FromBlock: big.NewInt(int64(1)),
@@ -658,7 +668,8 @@ func (r repeater) compareLogsByFilterCriteria() {
 			},
 			true,
 		},
-		{"block range 1 to lastBlockNumber, last address",
+		{
+			"block range 1 to lastBlockNumber, last address",
 			func() {
 				crit = filters.FilterCriteria{
 					FromBlock: big.NewInt(int64(1)),
@@ -669,7 +680,8 @@ func (r repeater) compareLogsByFilterCriteria() {
 			true,
 		},
 
-		{"block range is nil and last address",
+		{
+			"block range is nil and last address",
 			func() {
 				crit = filters.FilterCriteria{
 					Addresses: []common.Address{lastAddr},
@@ -677,7 +689,8 @@ func (r repeater) compareLogsByFilterCriteria() {
 			},
 			true,
 		},
-		{"block range is nil and invalid address",
+		{
+			"block range is nil and invalid address",
 			func() {
 				invalidAddr := common.BytesToAddress([]byte("invalid addr"))
 				crit = filters.FilterCriteria{
@@ -711,7 +724,8 @@ func (r repeater) compareLogsByFilterCriteria() {
 		rounds  int
 		pretest func()
 	}{
-		{"block range 1-1000 and random topic",
+		{
+			"block range 1-1000 and random topic",
 			100,
 			func() {
 				randomTopic := fetchRandomTopicFromLogs(defaultLogs)
@@ -719,7 +733,8 @@ func (r repeater) compareLogsByFilterCriteria() {
 				crit.Topics = [][]common.Hash{{randomTopic}}
 			},
 		},
-		{"block range 1-1000 and random address",
+		{
+			"block range 1-1000 and random address",
 			100,
 			func() {
 				randomAddress := fetchRandomAddrFromLogs(defaultLogs)
@@ -770,7 +785,6 @@ func (s *IntegrationTestSuite) TestRepeater() {
 
 // use command `go test  -timeout 120s  -run ^TestIntegrationTestSuite$ -testify.m TestFullRepeater` to run test scenario
 func (s *IntegrationTestSuite) TestFullRepeater() {
-
 	fullRepeater := newRepeater(s)
 
 	wg := new(sync.WaitGroup)
@@ -782,7 +796,6 @@ func (s *IntegrationTestSuite) TestFullRepeater() {
 
 		// process LLR block votes and BRs in fullReapeter
 		fullRepeater.processBlockVotesRecords(false)
-
 	}()
 
 	go func() {
@@ -813,7 +826,7 @@ func (s *IntegrationTestSuite) TestFullRepeater() {
 
 	// Comparing the store states
 	fetchTable := func(table kvdb.Store) map[string]string {
-		var m = make(map[string]string)
+		m := make(map[string]string)
 		it := table.NewIterator(nil, nil)
 		defer it.Release()
 		for it.Next() {
@@ -897,7 +910,7 @@ func TestBlockAndEpochRecords(t *testing.T) {
 	// 2.create block record manually
 	br1 := ibr.LlrIdxFullBlockRecord{Idx: idx.Block(2)}
 	br1Hash := br1.Hash()
-	//3. process BR1, the error will popped up
+	// 3. process BR1, the error will popped up
 	require.EqualError(t, env.ProcessFullBlockRecord(br1), eventcheck.ErrUndecidedBR.Error())
 
 	// 4.create less than 1/3W+1 epoch votes, ER1 still should not be processed
@@ -920,17 +933,17 @@ func TestBlockAndEpochRecords(t *testing.T) {
 	// 7.Get an error that the er has been already processed.
 	require.EqualError(t, env.ProcessFullEpochRecord(er2), eventcheck.ErrAlreadyProcessedER.Error())
 
-	//8. try to process Br1 with one vote with the same epoch as er1. it will(*Validators).GetWeightByIdx(...)
+	// 8. try to process Br1 with one vote with the same epoch as er1. it will(*Validators).GetWeightByIdx(...)
 	e = fakeEvent(1, er1.Idx, false, 0, 0, br1Hash)
 	bv := inter.AsSignedBlockVotes(e)
-	require.EqualError(t, env.ProcessBlockVotes(bv), errValidatorNotExist.Error()) //cause there are no validators
+	require.EqualError(t, env.ProcessBlockVotes(bv), errValidatorNotExist.Error()) // cause there are no validators
 	require.EqualError(t, env.ProcessFullBlockRecord(br1), eventcheck.ErrUndecidedBR.Error())
 
-	//9,10. process er1 and er2. it should yield an ErrAlreadyProcessedER error
+	// 9,10. process er1 and er2. it should yield an ErrAlreadyProcessedER error
 	require.EqualError(t, env.ProcessFullEpochRecord(er1), eventcheck.ErrAlreadyProcessedER.Error())
 	require.EqualError(t, env.ProcessFullEpochRecord(er2), eventcheck.ErrAlreadyProcessedER.Error())
 
-	//11 add votes < 1/3W+1 for Br1. Record still should not be processed.
+	// 11 add votes < 1/3W+1 for Br1. Record still should not be processed.
 	fmt.Println("adding 3 votes for br1")
 	for i := 5; i < 8; i++ {
 		e := fakeEvent(1, 0, false, 0, i, br1Hash)
@@ -939,7 +952,7 @@ func TestBlockAndEpochRecords(t *testing.T) {
 	}
 	require.EqualError(t, env.ProcessFullBlockRecord(br1), eventcheck.ErrUndecidedBR.Error())
 
-	//12 add one vote for br1, then we have 1/3W+1 votes
+	// 12 add one vote for br1, then we have 1/3W+1 votes
 	fmt.Println("adding 4th block vote to make up to match 1/3W+1")
 	e = fakeEvent(1, 0, true, 2, 8, br1Hash)
 	bv = inter.AsSignedBlockVotes(e)
@@ -954,7 +967,7 @@ func TestBlockAndEpochRecords(t *testing.T) {
 	// 15 process br1
 	require.NoError(t, env.ProcessFullBlockRecord(br1))
 
-	//16 process br1 and br2, they should yield an error that they have been already processed
+	// 16 process br1 and br2, they should yield an error that they have been already processed
 	require.EqualError(t, env.ProcessFullBlockRecord(br1), eventcheck.ErrAlreadyProcessedBR.Error())
 	require.EqualError(t, env.ProcessFullBlockRecord(br2), eventcheck.ErrAlreadyProcessedBR.Error())
 }
@@ -1107,7 +1120,8 @@ func TestEpochRecordWithDiffValidators(t *testing.T) {
 	// put es and bs of 3rd apoch at LlrIdxFullEpochRecord of epoch 4
 	er = ier.LlrIdxFullEpochRecord{
 		LlrFullEpochRecord: ier.LlrFullEpochRecord{*bs, *es},
-		Idx:                idx.Epoch(startEpoch + 2)}
+		Idx:                idx.Epoch(startEpoch + 2),
+	}
 	erHash = er.Hash()
 
 	// confirm with votes of different weights
@@ -1136,7 +1150,7 @@ func TestEpochRecordWithDiffValidators(t *testing.T) {
 		}
 
 		w = pos.Weight(1000000)
-		//set 8th, 9th and 10th validatora with weight 1000000
+		// set 8th, 9th and 10th validatora with weight 1000000
 		for i := idx.ValidatorID(8); i <= 10; i++ {
 			builder.Set(i, w)
 		}
@@ -1188,7 +1202,6 @@ func TestEpochRecordWithDiffValidators(t *testing.T) {
 }
 
 func TestProcessEpochVotesWonErNil(t *testing.T) {
-
 	const (
 		validatorsNum = 10
 		startEpoch    = 2
@@ -1211,7 +1224,7 @@ func TestProcessEpochVotesWonErNil(t *testing.T) {
 		}
 
 		w = pos.Weight(10000)
-		//set 8th, 9th and 10th validatora with weight 10000
+		// set 8th, 9th and 10th validatora with weight 10000
 		for i := idx.ValidatorID(5); i <= 10; i++ {
 			builder.Set(i, w)
 			if i == idx.ValidatorID(9) || i == idx.ValidatorID(10) {
@@ -1279,7 +1292,6 @@ func TestProcessEpochVotesWonErNil(t *testing.T) {
 }
 
 func TestProcessEpochVotesWonErNotNilDoubleSign(t *testing.T) {
-
 	const (
 		validatorsNum = 10
 		startEpoch    = 2
@@ -1294,16 +1306,16 @@ func TestProcessEpochVotesWonErNotNilDoubleSign(t *testing.T) {
 		builder := pos.NewBuilder()
 		w := pos.Weight(1000)
 
-		//thresholdweight totalWeight(8200)/3 +1 = 2734
+		// thresholdweight totalWeight(8200)/3 +1 = 2734
 		// set 8 validators with weight 1000
 
 		for i := idx.ValidatorID(1); i <= 8; i++ {
-			//partialWeight += w
+			// partialWeight += w
 			builder.Set(i, w)
 		}
 
 		w = pos.Weight(100)
-		//set 9th and 10th validatora with weight 100
+		// set 9th and 10th validatora with weight 100
 		for i := idx.ValidatorID(9); i <= 10; i++ {
 			builder.Set(i, w)
 		}
@@ -1446,7 +1458,7 @@ func TestProcessBlockVotesDoubleSign(t *testing.T) {
 		require.NoError(env.ProcessBlockVotes(bv))
 	}
 
-	wonBr = env.store.GetLlrBlockResult(idx.Block(2)) //br1Hash
+	wonBr = env.store.GetLlrBlockResult(idx.Block(2)) // br1Hash
 	require.NotNil(wonBr)
 	require.NotEqual(wonBr.Hex(), invalidHash.Hex()) // *wonBr != bv
 }
@@ -1504,16 +1516,16 @@ func TestBlockVotesTests(t *testing.T) {
 		builder := pos.NewBuilder()
 		w := pos.Weight(1000)
 
-		//thresholdweight totalWeight(8200)/3 +1 = 2734
+		// thresholdweight totalWeight(8200)/3 +1 = 2734
 		// set 8 validators with weight 1000
 
 		for i := idx.ValidatorID(1); i <= 8; i++ {
-			//partialWeight += w
+			// partialWeight += w
 			builder.Set(i, w)
 		}
 
 		w = pos.Weight(100)
-		//set 9th and 10th validatora with weight 100
+		// set 9th and 10th validatora with weight 100
 		for i := idx.ValidatorID(9); i <= 10; i++ {
 			builder.Set(i, w)
 		}
@@ -1553,13 +1565,14 @@ func TestBlockVotesTests(t *testing.T) {
 
 	er = ier.LlrIdxFullEpochRecord{
 		LlrFullEpochRecord: ier.LlrFullEpochRecord{*bs, *es},
-		Idx:                idx.Epoch(startEpoch + 2)}
+		Idx:                idx.Epoch(startEpoch + 2),
+	}
 	erHash = er.Hash()
 
 	br := ibr.LlrIdxFullBlockRecord{Idx: idx.Block(2)}
 	brHash := br.Hash()
 
-	//we can votr for validators with the different weights
+	// we can votr for validators with the different weights
 	incorrectBVEpoch := idx.Epoch(3)
 	e := fakeEvent(1, incorrectBVEpoch, false, 0, 1, brHash)
 	bvs := inter.AsSignedBlockVotes(e)
@@ -1569,7 +1582,7 @@ func TestBlockVotesTests(t *testing.T) {
 
 	// ьфлу туц е
 
-	//require.EqualError(env.ProcessBlockVotes(bvs), eventcheck.ErrAlreadyProcessedBVs.Error())
+	// require.EqualError(env.ProcessBlockVotes(bvs), eventcheck.ErrAlreadyProcessedBVs.Error())
 
 	/*
 		for i := 5; i < 8; i++ {

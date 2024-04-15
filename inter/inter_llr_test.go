@@ -15,6 +15,7 @@ var test_block_votes = LlrBlockVotes{
 		hash.Of(nil),
 	},
 }
+
 var test_signed_event_locator = SignedEventLocator{
 	Locator: EventLocator{
 		BaseHash:    hash.Of(nil),
@@ -27,9 +28,12 @@ var test_signed_event_locator = SignedEventLocator{
 	},
 	Sig: [64]byte{},
 }
-var test_txs_and_misbehaviour_proofs_hash = hash.Of(nil)
-var test_epoch_vote_hash = hash.Of(nil)
-var test_block_votes_hash = hash.Of(nil)
+
+var (
+	test_txs_and_misbehaviour_proofs_hash = hash.Of(nil)
+	test_epoch_vote_hash                  = hash.Of(nil)
+	test_block_votes_hash                 = hash.Of(nil)
+)
 
 var test_llr_signed_block_votes = LlrSignedBlockVotes{
 	Signed:                       test_signed_event_locator,
@@ -37,6 +41,7 @@ var test_llr_signed_block_votes = LlrSignedBlockVotes{
 	EpochVoteHash:                test_epoch_vote_hash,
 	Val:                          test_block_votes,
 }
+
 var test_llr_signed_epoch_vote = LlrSignedEpochVote{
 	Signed:                       test_signed_event_locator,
 	TxsAndMisbehaviourProofsHash: test_txs_and_misbehaviour_proofs_hash,

@@ -307,7 +307,7 @@ func consensusCallbackBeginBlockFn(
 					sort.Sort(confirmedEvents)
 
 					// new block
-					var block = &inter.Block{
+					block := &inter.Block{
 						Time:    blockCtx.Time,
 						Atropos: cBlock.Atropos,
 						Events:  hash.Events(confirmedEvents),

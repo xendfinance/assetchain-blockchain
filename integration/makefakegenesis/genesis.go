@@ -35,9 +35,7 @@ import (
 	"github.com/Fantom-foundation/go-opera/opera/genesisstore"
 )
 
-var (
-	FakeGenesisTime = inter.Timestamp(1608600000 * time.Second)
-)
+var FakeGenesisTime = inter.Timestamp(1608600000 * time.Second)
 
 // FakeKey gets n-th fake private key.
 func FakeKey(n idx.ValidatorID) *ecdsa.PrivateKey {

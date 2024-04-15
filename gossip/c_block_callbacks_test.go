@@ -63,5 +63,4 @@ func TestConsensusCallback(t *testing.T) {
 			fmt.Sprintf("account%d", i),
 		)
 	}
-
 }

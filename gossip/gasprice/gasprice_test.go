@@ -158,7 +158,6 @@ func TestOracle_constructiveGasPrice(t *testing.T) {
 	require.Equal(t, "1255", gpo.constructiveGasPrice(0, 0.1*DecimalUnit, big.NewInt(100)).String())
 	require.Equal(t, "838", gpo.constructiveGasPrice(100800000000, 0, big.NewInt(100)).String())
 	require.Equal(t, "2500", gpo.constructiveGasPrice(gpo.maxTotalGasPower().Uint64()*2, 2*DecimalUnit, big.NewInt(100)).String())
-
 }
 
 func TestOracle_reactiveGasPrice(t *testing.T) {

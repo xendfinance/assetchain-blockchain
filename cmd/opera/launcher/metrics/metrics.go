@@ -48,7 +48,7 @@ func measureDbDir(name, datadir string) {
 func sizeOfDir(dir string, counter *int) (size int64) {
 	err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
 		*counter++
-		if *counter % 100 == 0 {
+		if *counter%100 == 0 {
 			time.Sleep(100 * time.Millisecond)
 		}
 		if err != nil {
@@ -69,7 +69,6 @@ func sizeOfDir(dir string, counter *int) (size int64) {
 
 		return nil
 	})
-
 	if err != nil {
 		log.Debug("datadir walk", "path", dir, "err", err)
 	}

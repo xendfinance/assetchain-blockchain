@@ -50,13 +50,11 @@ func (s *LLRBasicCheckTestSuite) TearDownSuite() {
 }
 
 func (s *LLRBasicCheckTestSuite) TestBasicCheckValidate() {
-
 	testCases := []struct {
 		name    string
 		pretest func()
 		errExp  error
 	}{
-
 		{
 			"ErrWrongNetForkID",
 			func() {
@@ -300,7 +298,6 @@ func (s *LLRBasicCheckTestSuite) TestBasicCheckValidate() {
 }
 
 func (s *LLRBasicCheckTestSuite) TestBasicCheckValidateEV() {
-
 	var ev inter.LlrSignedEpochVote
 
 	testCases := []struct {
@@ -569,7 +566,6 @@ func (s *LLRBasicCheckTestSuite) TestBasicCheckValidateEV() {
 			}
 		})
 	}
-
 }
 
 func (s *LLRBasicCheckTestSuite) TestBasicCheckValidateBV() {
@@ -897,7 +893,6 @@ func (s *LLRBasicCheckTestSuite) TestBasicCheckValidateBV() {
 			}
 		})
 	}
-
 }
 
 func TestBasicCheckIntegrationTestSuite(t *testing.T) {

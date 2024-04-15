@@ -194,7 +194,6 @@ func initFlags() {
 	nodeFlags = append(nodeFlags, txpoolFlags...)
 	nodeFlags = append(nodeFlags, operaFlags...)
 	nodeFlags = append(nodeFlags, legacyRpcFlags...)
-
 }
 
 // init the CLI app.

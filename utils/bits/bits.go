@@ -125,6 +125,6 @@ func (a *Reader) NonReadBytes() int {
 
 // NonReadBytes returns a number of non-consumed bits
 func (a *Reader) NonReadBits() int {
-	//return a.nonReadBits
+	// return a.nonReadBits
 	return a.NonReadBytes()*8 - a.bitOffset
 }

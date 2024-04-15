@@ -69,9 +69,7 @@ const (
 	blocksChanSize = 10
 )
 
-var (
-	ErrInvalidSubscriptionID = errors.New("invalid id")
-)
+var ErrInvalidSubscriptionID = errors.New("invalid id")
 
 type subscription struct {
 	id        rpc.ID

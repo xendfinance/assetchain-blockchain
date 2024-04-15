@@ -162,7 +162,8 @@ type Service struct {
 
 func NewService(stack *node.Node, config Config, store *Store, blockProc BlockProc,
 	engine lachesis.Consensus, dagIndexer *vecmt.Index, newTxPool func(evmcore.StateReader) TxPool,
-	haltCheck func(oldEpoch, newEpoch idx.Epoch, age time.Time) bool) (*Service, error) {
+	haltCheck func(oldEpoch, newEpoch idx.Epoch, age time.Time) bool,
+) (*Service, error) {
 	if err := config.Validate(); err != nil {
 		return nil, err
 	}

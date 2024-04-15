@@ -17,9 +17,7 @@ import (
 	"github.com/Fantom-foundation/go-opera/logger"
 )
 
-var (
-	errDBClosed = errors.New("database closed")
-)
+var errDBClosed = errors.New("database closed")
 
 type (
 	epochStore struct {

@@ -31,7 +31,7 @@ func isBootstrapNodesDefault(root *ast.Table) (
 
 	emptyNode := fmt.Sprintf("\"%s\"", asDefault[0])
 
-	var res = map[string]bool{
+	res := map[string]bool{
 		"BootstrapNodes":   false,
 		"BootstrapNodesV5": false,
 	}
@@ -61,7 +61,7 @@ func (c *config) UnmarshalTOML(input []byte) error {
 	defaultBootstrapNodes, defaultBootstrapNodesV5 := isBootstrapNodesDefault(ast)
 
 	type rawCfg config
-	var raw = rawCfg(*c)
+	raw := rawCfg(*c)
 	err = toml.UnmarshalTable(ast, &raw)
 	if err != nil {
 		return err

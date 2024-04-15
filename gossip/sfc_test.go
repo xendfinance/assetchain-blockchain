@@ -185,7 +185,6 @@ func TestSFC(t *testing.T) {
 		require.Equal(1, rr.Len())
 		require.NotEqual(types.ReceiptStatusSuccessful, rr[0].Status)
 	})
-
 }
 
 func circleTransfers(t *testing.T, env *testEnv, count uint64) {

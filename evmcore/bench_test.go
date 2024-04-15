@@ -36,30 +36,39 @@ import (
 func BenchmarkInsertChain_empty_memdb(b *testing.B) {
 	benchInsertChain(b, false, nil)
 }
+
 func BenchmarkInsertChain_empty_diskdb(b *testing.B) {
 	benchInsertChain(b, true, nil)
 }
+
 func BenchmarkInsertChain_valueTx_memdb(b *testing.B) {
 	benchInsertChain(b, false, genValueTx(0))
 }
+
 func BenchmarkInsertChain_valueTx_diskdb(b *testing.B) {
 	benchInsertChain(b, true, genValueTx(0))
 }
+
 func BenchmarkInsertChain_valueTx_100kB_memdb(b *testing.B) {
 	benchInsertChain(b, false, genValueTx(100*1024))
 }
+
 func BenchmarkInsertChain_valueTx_100kB_diskdb(b *testing.B) {
 	benchInsertChain(b, true, genValueTx(100*1024))
 }
+
 func BenchmarkInsertChain_ring200_memdb(b *testing.B) {
 	benchInsertChain(b, false, genTxRing(200))
 }
+
 func BenchmarkInsertChain_ring200_diskdb(b *testing.B) {
 	benchInsertChain(b, true, genTxRing(200))
 }
+
 func BenchmarkInsertChain_ring1000_memdb(b *testing.B) {
 	benchInsertChain(b, false, genTxRing(1000))
 }
+
 func BenchmarkInsertChain_ring1000_diskdb(b *testing.B) {
 	benchInsertChain(b, true, genTxRing(1000))
 }

@@ -53,7 +53,6 @@ func (s *PublicDAGChainAPI) GetEventPayload(ctx context.Context, shortEventID st
 // * When epoch is -1 the heads for latest sealed epoch are returned.
 func (s *PublicDAGChainAPI) GetHeads(ctx context.Context, epoch rpc.BlockNumber) ([]hexutil.Bytes, error) {
 	res, err := s.b.GetHeads(ctx, epoch)
-
 	if err != nil {
 		return nil, err
 	}

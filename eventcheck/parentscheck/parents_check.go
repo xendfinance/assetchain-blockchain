@@ -8,9 +8,7 @@ import (
 	"github.com/Fantom-foundation/go-opera/inter"
 )
 
-var (
-	ErrPastTime = errors.New("event has lower claimed time than self-parent")
-)
+var ErrPastTime = errors.New("event has lower claimed time than self-parent")
 
 // Checker which require only parents list + current epoch info
 type Checker struct {

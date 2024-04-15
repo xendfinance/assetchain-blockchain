@@ -41,7 +41,7 @@ func (e enrEntry) ENRKey() string {
 // StartENRUpdater starts the `opera` ENR updater loop, which listens for chain
 // head events and updates the requested node record whenever a fork is passed.
 func StartENRUpdater(svc *Service, ln *enode.LocalNode) {
-	var newHead = make(chan evmcore.ChainHeadNotify, 10)
+	newHead := make(chan evmcore.ChainHeadNotify, 10)
 	sub := svc.feed.SubscribeNewBlock(newHead)
 
 	go func() {

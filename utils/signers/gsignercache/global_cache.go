@@ -6,9 +6,7 @@ import (
 	lru "github.com/hashicorp/golang-lru"
 )
 
-var (
-	globalCache, _ = lru.New(40000)
-)
+var globalCache, _ = lru.New(40000)
 
 type WlruCache struct {
 	Cache *lru.Cache

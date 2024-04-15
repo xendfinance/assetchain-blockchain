@@ -108,7 +108,7 @@ func readEpochPubKeys(s *Store, epoch idx.Epoch) *ValidatorsPubKeys {
 	if es == nil {
 		return nil
 	}
-	var pubkeys = make(map[idx.ValidatorID]validatorpk.PubKey, len(es.ValidatorProfiles))
+	pubkeys := make(map[idx.ValidatorID]validatorpk.PubKey, len(es.ValidatorProfiles))
 	for id, profile := range es.ValidatorProfiles {
 		pubkeys[id] = profile.PubKey
 	}

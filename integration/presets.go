@@ -5,8 +5,10 @@ import (
 	"github.com/syndtr/goleveldb/leveldb/opt"
 )
 
-var DefaultDBsConfig = Ldb1DBsConfig
-var DefaultDBsConfigName = "ldb-1"
+var (
+	DefaultDBsConfig     = Ldb1DBsConfig
+	DefaultDBsConfigName = "ldb-1"
+)
 
 /*
  * pbl-1 config

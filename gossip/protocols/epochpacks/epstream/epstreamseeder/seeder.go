@@ -12,9 +12,7 @@ import (
 	"github.com/Fantom-foundation/go-opera/gossip/protocols/epochpacks/epstream"
 )
 
-var (
-	ErrWrongType = errors.New("wrong request type")
-)
+var ErrWrongType = errors.New("wrong request type")
 
 type Seeder struct {
 	*basestreamseeder.BaseSeeder

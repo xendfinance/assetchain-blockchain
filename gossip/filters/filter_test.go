@@ -265,5 +265,4 @@ func TestFilters(t *testing.T) {
 	if len(logs) != 0 {
 		t.Error("expected 0 log, got", len(logs))
 	}
-
 }

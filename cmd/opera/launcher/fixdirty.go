@@ -85,7 +85,8 @@ func healDirty(ctx *cli.Context) error {
 
 // fixDirtyGossipDb reverts the gossip database into state, when was one of last epochs sealed
 func fixDirtyGossipDb(producer kvdb.FlushableDBProducer, cfg *config) (
-	epochState *iblockproc.EpochState, topEpoch idx.Epoch, err error) {
+	epochState *iblockproc.EpochState, topEpoch idx.Epoch, err error,
+) {
 	gdb := makeGossipStore(producer, cfg) // requires FlushIDKey present (not clean) in all dbs
 	defer gdb.Close()
 	topEpoch = gdb.GetEpoch()

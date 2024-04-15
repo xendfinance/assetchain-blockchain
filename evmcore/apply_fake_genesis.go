@@ -94,7 +94,7 @@ func MustApplyFakeGenesis(statedb *state.StateDB, time inter.Timestamp, balances
 
 // FakeKey gets n-th fake private key.
 func FakeKey(n uint32) *ecdsa.PrivateKey {
-	var keys = [100]string{
+	keys := [100]string{
 		"0x163f5f0f9a621d72fedd85ffca3d08d131ab4e812181e0d30ffd1c885d20aac7",
 		"0x3144c0aa4ced56dc15c79b045bc5559a5ac9363d98db6df321fe3847a103740f",
 		"0x04a531f967898df5dbe223b67989b248e23c1c356a3f6717775cccb7fe53482c",

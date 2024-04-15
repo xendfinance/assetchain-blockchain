@@ -163,7 +163,7 @@ func pruneState(ctx *cli.Context) error {
 	}
 
 	tmpDir := path.Join(cfg.Node.DataDir, "tmp")
-	_ = os.MkdirAll(tmpDir, 0700)
+	_ = os.MkdirAll(tmpDir, 0o700)
 	defer os.RemoveAll(tmpDir)
 
 	genesisBlock := gdb.GetBlock(*gdb.GetGenesisBlockIndex())

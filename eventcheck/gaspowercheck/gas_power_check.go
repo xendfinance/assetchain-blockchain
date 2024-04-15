@@ -14,10 +14,8 @@ import (
 	"github.com/Fantom-foundation/go-opera/inter/iblockproc"
 )
 
-var (
-	// ErrWrongGasPowerLeft indicates that event's GasPowerLeft is miscalculated.
-	ErrWrongGasPowerLeft = errors.New("event has wrong GasPowerLeft")
-)
+// ErrWrongGasPowerLeft indicates that event's GasPowerLeft is miscalculated.
+var ErrWrongGasPowerLeft = errors.New("event has wrong GasPowerLeft")
 
 type ValidatorState struct {
 	PrevEpochEvent iblockproc.EventInfo

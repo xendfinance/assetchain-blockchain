@@ -120,8 +120,7 @@ func NewGenesisBuilder(dbs kvdb.DBProducer) *GenesisBuilder {
 	}
 }
 
-type dummyHeaderReturner struct {
-}
+type dummyHeaderReturner struct{}
 
 func (d dummyHeaderReturner) GetHeader(common.Hash, uint64) *evmcore.EvmHeader {
 	return &evmcore.EvmHeader{}

@@ -30,7 +30,7 @@ func Wrap(s kvdb.Store, limit uint64, strategy func() ContainerI, name string) *
 		limit:   limit,
 		newCont: strategy,
 		cont:    strategy(),
-		name: name,
+		name:    name,
 	}
 }
 
@@ -48,8 +48,8 @@ func Wrap2M(s kvdb.Store, limit1 uint64, limit2 uint64, forward bool, name strin
 
 func estSize(keyLen int, valLen int) uint64 {
 	// Storage overheads, related to adding/deleting a record,
-	//wouldn't be only proportional to length of key and value.
-	//E.g. if one adds 10 records with length of 2, it will be more expensive than 1 record with length 20
+	// wouldn't be only proportional to length of key and value.
+	// E.g. if one adds 10 records with length of 2, it will be more expensive than 1 record with length 20
 	// Now, 64 wasn't really calculated but is rather a guesstimation
 	return uint64(keyLen + valLen + 64)
 }

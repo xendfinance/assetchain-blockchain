@@ -16,9 +16,7 @@ import (
 	"github.com/Fantom-foundation/go-opera/inter/validatorpk"
 )
 
-var (
-	ErrNotSupportedType = errors.New("not supported key type")
-)
+var ErrNotSupportedType = errors.New("not supported key type")
 
 type PrivateKey struct {
 	Type    uint8

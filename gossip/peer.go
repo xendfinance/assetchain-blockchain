@@ -25,9 +25,7 @@ import (
 	"github.com/Fantom-foundation/go-opera/inter"
 )
 
-var (
-	errNotRegistered = errors.New("peer is not registered")
-)
+var errNotRegistered = errors.New("peer is not registered")
 
 const (
 	handshakeTimeout = 5 * time.Second

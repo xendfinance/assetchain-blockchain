@@ -12,9 +12,7 @@ import (
 	"github.com/Fantom-foundation/go-opera/inter"
 )
 
-var (
-	ErrBusy = errors.New("failed to acquire events semaphore")
-)
+var ErrBusy = errors.New("failed to acquire events semaphore")
 
 // Processor is responsible for processing incoming events
 type Processor struct {
@@ -119,7 +117,7 @@ func (f *Processor) Enqueue(peer string, items []inter.LlrSignedBlockVotes, done
 			defer done()
 		}
 
-		var orderedResults = make([]*checkRes, itemsLen)
+		orderedResults := make([]*checkRes, itemsLen)
 		var processed int
 		for processed < itemsLen {
 			select {

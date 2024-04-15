@@ -1376,8 +1376,8 @@ func (h *handler) BroadcastEvent(event *inter.EventPayload, passed time.Duration
 	fullRecipients := h.decideBroadcastAggressiveness(event.Size(), passed, len(peers))
 
 	// Exclude low quality peers from fullBroadcast
-	var fullBroadcast = make([]*peer, 0, fullRecipients)
-	var hashBroadcast = make([]*peer, 0, len(peers))
+	fullBroadcast := make([]*peer, 0, fullRecipients)
+	hashBroadcast := make([]*peer, 0, len(peers))
 	for _, p := range peers {
 		if !p.Useless() && len(fullBroadcast) < fullRecipients {
 			fullBroadcast = append(fullBroadcast, p)
@@ -1399,7 +1399,7 @@ func (h *handler) BroadcastEvent(event *inter.EventPayload, passed time.Duration
 // BroadcastTxs will propagate a batch of transactions to all peers which are not known to
 // already have the given transaction.
 func (h *handler) BroadcastTxs(txs types.Transactions) {
-	var txset = make(map[*peer]types.Transactions)
+	txset := make(map[*peer]types.Transactions)
 
 	// Broadcast transactions to a batch of peers not knowing about it
 	totalSize := common.StorageSize(0)
@@ -1514,7 +1514,7 @@ type NodeInfo struct {
 	Genesis     common.Hash `json:"genesis"` // SHA3 hash of the host's genesis object
 	Epoch       idx.Epoch   `json:"epoch"`
 	NumOfBlocks idx.Block   `json:"blocks"`
-	//Config  *params.ChainConfig `json:"config"`  // Chain configuration for the fork rules
+	// Config  *params.ChainConfig `json:"config"`  // Chain configuration for the fork rules
 }
 
 // NodeInfo retrieves some protocol metadata about the running host node.

@@ -12,9 +12,7 @@ import (
 	"github.com/Fantom-foundation/go-opera/inter/ibr"
 )
 
-var (
-	ErrBusy = errors.New("failed to acquire events semaphore")
-)
+var ErrBusy = errors.New("failed to acquire events semaphore")
 
 // Processor is responsible for processing incoming events
 type Processor struct {
