@@ -7,6 +7,8 @@ import (
 	"strings"
 	"time"
 
+	cli "gopkg.in/urfave/cli.v1"
+
 	"github.com/Fantom-foundation/lachesis-base/inter/idx"
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/accounts/keystore"
@@ -19,7 +21,6 @@ import (
 	"github.com/ethereum/go-ethereum/node"
 	"github.com/ethereum/go-ethereum/p2p/discover/discfilter"
 	"github.com/ethereum/go-ethereum/params"
-	cli "gopkg.in/urfave/cli.v1"
 
 	"github.com/Fantom-foundation/go-opera/cmd/opera/launcher/metrics"
 	"github.com/Fantom-foundation/go-opera/cmd/opera/launcher/tracing"
@@ -323,7 +324,7 @@ func makeNode(ctx *cli.Context, cfg *config, genesisStore *genesisstore.Store) (
 		networkName = genesisStore.Header().NetworkName
 	}
 	if needDefaultBootnodes(cfg.Node.P2P.BootstrapNodes) {
-		bootnodes := Bootnodes[networkName]
+		bootnodes := Bootnodes[g.NetworkID]
 		if bootnodes == nil {
 			bootnodes = []string{}
 		}
