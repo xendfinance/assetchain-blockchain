@@ -20,10 +20,10 @@ NAME:
 
 USAGE:
    opera [options] command [command options] [arguments...]
-   
+
 VERSION:
    1.1.3-rc.5-7f58df14-1712665667
-   
+
 COMMANDS:
    account                            Manage accounts
    attach                             Start an interactive JavaScript environment (connect to node)
@@ -42,7 +42,7 @@ COMMANDS:
    version                            Print version numbers
    wallet                             Manage Ethereum presale wallets
    help, h                            Shows a list of commands or help for one command
-   
+
 OPERA OPTIONS:
   --genesis value                     'path to genesis file' - sets the network genesis configuration.
   --genesis.allowExperimental         Allow to use experimental genesis file.
@@ -63,7 +63,7 @@ OPERA OPTIONS:
   --gcmode value                      Blockchain garbage collection mode ("light", "full", "archive") (default: "archive")
   --db.preset value                   DBs layout preset ('pbl-1' or 'ldb-1' or 'legacy-ldb' or 'legacy-pbl')
   --db.migration.mode value           MultiDB migration mode ('reformat' or 'rebuild')
-  
+
 TRANSACTION POOL OPTIONS:
   --txpool.locals value               Comma separated accounts to treat as locals (no flush, priority inclusion)
   --txpool.nolocals                   Disables price exemptions for locally submitted transactions
@@ -76,16 +76,16 @@ TRANSACTION POOL OPTIONS:
   --txpool.accountqueue value         Maximum number of non-executable transaction slots permitted per account (default: 64)
   --txpool.globalqueue value          Maximum number of non-executable transaction slots for all accounts (default: 1024)
   --txpool.lifetime value             Maximum amount of time non-executable transaction are queued (default: 3h0m0s)
-  
+
 PERFORMANCE TUNING OPTIONS:
   --cache value                       Megabytes of memory allocated to internal caching (default: 3600)
-  
+
 ACCOUNT OPTIONS:
   --unlock value                      Comma separated list of accounts to unlock
   --password value                    Password file to use for non-interactive password input
   --signer value                      External signer (url or path to ipc file)
   --allow-insecure-unlock             Allow insecure account unlocking when account-related RPCs are exposed by http
-  
+
 API OPTIONS:
   --http                              Enable the HTTP-RPC server
   --http.addr value                   HTTP-RPC server listening interface (default: "localhost")
@@ -109,12 +109,12 @@ API OPTIONS:
   --rpc.evmtimeout value              Sets a timeout used for eth_call (0=infinite) (default: 5s)
   --rpc.txfeecap value                Sets a cap on transaction fee (in FTM) that can be sent via the RPC APIs (0 = no cap) (default: 100)
   --rpc.timeout value                 Time limit for RPC calls execution (default: 5s)
-  
+
 CONSOLE OPTIONS:
   --jspath loadScript                 JavaScript root path for loadScript (default: ".")
   --exec value                        Execute JavaScript statement
   --preload value                     Comma separated list of JavaScript files to preload into the console
-  
+
 NETWORKING OPTIONS:
   --bootnodes value                   Comma separated enode URLs for P2P discovery bootstrap
   --port value                        Network listening port (default: 5050)
@@ -128,9 +128,9 @@ NETWORKING OPTIONS:
   --privatenodes value                Comma separated enode URLs which must not be advertised as peers to public network
   --nodekey value                     P2P node key file
   --nodekeyhex value                  P2P node key as hex (for testing)
-  
+
 GAS PRICE ORACLE OPTIONS:
-  
+
 METRICS AND STATS OPTIONS:
   --metrics                              Enable metrics collection and reporting
   --metrics.expensive                    Enable expensive metrics collection and reporting
@@ -147,10 +147,10 @@ METRICS AND STATS OPTIONS:
   --metrics.influxdb.bucket value        InfluxDB bucket name to push reported metrics to (v2 only) (default: "geth")
   --metrics.influxdb.organization value  InfluxDB organization name (v2 only) (default: "geth")
   --tracing                              Enable traces collection and reporting
-  
+
 TESTING OPTIONS:
   --fakenet value                     'n/N' - sets coinbase as fake n-th key from genesis of N validators.
-  
+
 LOGGING AND DEBUGGING OPTIONS:
   --verbosity value                   Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail (default: 3)
   --vmodule value                     Per-module verbosity: comma-separated list of <pattern>=<level> (e.g. eth/*=5,p2p=4)
@@ -164,7 +164,7 @@ LOGGING AND DEBUGGING OPTIONS:
   --pprof.blockprofilerate value      Turn on block profiling with the given rate (default: 0)
   --pprof.cpuprofile value            Write CPU profile to the given file
   --trace value                       Write execution trace to the given file
-  
+
 ALIASED (deprecated) OPTIONS:
   --nousb                             Disables monitoring for and managing USB hardware wallets (deprecated)
   --rpc                               Enable the HTTP-RPC server (deprecated and will be removed June 2021, use --http)
@@ -173,10 +173,10 @@ ALIASED (deprecated) OPTIONS:
   --rpccorsdomain value               Comma separated list of domains from which to accept cross origin requests (browser enforced) (deprecated and will be removed June 2021, use --http.corsdomain)
   --rpcvhosts value                   Comma separated list of virtual hostnames from which to accept requests (server enforced). Accepts '*' wildcard. (deprecated and will be removed June 2021, use --http.vhosts) (default: "localhost")
   --rpcapi value                      API's offered over the HTTP-RPC interface (deprecated and will be removed June 2021, use --http.api)
-  
+
 MISC OPTIONS:
   --help, -h                          show help
   --validatorsfile value              Path to validators file
   --network.type value                Network type ("mainnet", "testnet" or "devnet") (default: "devnet")
-  
+
 

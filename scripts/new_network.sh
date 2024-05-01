@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-validutorsNum=3
+validutorsNum=5
 
 ../build/opera \
 network new $validutorsNum \

@@ -21,7 +21,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"regexp"
@@ -45,11 +44,10 @@ type TestCmd struct {
 	Func    template.FuncMap
 	Data    interface{}
 	Cleanup func()
-
-	cmd    *exec.Cmd
-	stdout *bufio.Reader
-	stdin  io.WriteCloser
-	stderr *testlogger
+	cmd     *exec.Cmd
+	stdout  *bufio.Reader
+	stdin   io.WriteCloser
+	stderr  *testlogger
 	// Err will contain the process exit error or interrupt signal error
 	Err error
 }
@@ -171,7 +169,7 @@ func (tt *TestCmd) ExpectRegexp(regex string) (*regexp.Regexp, []string) {
 // printing any additional text on stdout.
 func (tt *TestCmd) ExpectExit() {
 	var output []byte
-	output, _ = ioutil.ReadAll(tt.stdout)
+	output, _ = io.ReadAll(tt.stdout)
 	tt.WaitExit()
 	if tt.Cleanup != nil {
 		tt.Cleanup()
@@ -273,5 +271,6 @@ func (rtee *runeTee) ReadByte() (b byte, err error) {
 	if err == nil {
 		rtee.buf.WriteByte(b)
 	}
+
 	return b, err
 }

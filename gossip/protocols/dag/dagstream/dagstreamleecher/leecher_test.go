@@ -6,10 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/require"
-
 	"github.com/Fantom-foundation/lachesis-base/hash"
 	"github.com/Fantom-foundation/lachesis-base/inter/idx"
+	"github.com/stretchr/testify/require"
 
 	"github.com/Fantom-foundation/go-opera/gossip/protocols/dag/dagstream"
 )

@@ -5,10 +5,11 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/Fantom-foundation/go-opera/utils/cser"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"
+
+	"github.com/Fantom-foundation/go-opera/utils/cser"
 )
 
 func TestSerializeLegacyTx(t *testing.T) {

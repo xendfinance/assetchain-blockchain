@@ -283,8 +283,12 @@ func (cr *fakeChainReader) Config() *params.ChainConfig {
 	return cr.config
 }
 
-func (cr *fakeChainReader) CurrentHeader() *EvmHeader                            { return nil }
-func (cr *fakeChainReader) GetHeaderByNumber(number uint64) *EvmHeader           { return nil }
-func (cr *fakeChainReader) GetHeaderByHash(hash common.Hash) *EvmHeader          { return nil }
+func (cr *fakeChainReader) CurrentHeader() *EvmHeader { return nil }
+
+func (cr *fakeChainReader) GetHeaderByNumber(number uint64) *EvmHeader { return nil }
+
+func (cr *fakeChainReader) GetHeaderByHash(hash common.Hash) *EvmHeader { return nil }
+
 func (cr *fakeChainReader) GetHeader(hash common.Hash, number uint64) *EvmHeader { return nil }
-func (cr *fakeChainReader) GetBlock(hash common.Hash, number uint64) *EvmBlock   { return nil }
+
+func (cr *fakeChainReader) GetBlock(hash common.Hash, number uint64) *EvmBlock { return nil }

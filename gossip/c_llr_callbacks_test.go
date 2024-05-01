@@ -1463,42 +1463,6 @@ func TestProcessBlockVotesDoubleSign(t *testing.T) {
 	require.NotEqual(wonBr.Hex(), invalidHash.Hex()) // *wonBr != bv
 }
 
-/*
-
-Blockvotes test cases
-1) hash of block record incorrect, block N does not belong epoch E,
-block vote for correct/incorrect hash
-validators from enother epoch
-2) hash of block record correct, block N does not belong epoch E, block vote for correct/incorrect hash   validators >= 1/3W ,validators <=1/3W -> error anticipated
-3) hash of block record correct, block N belongs epoch E, block vote for correct/incorrect hash validators >= 1/3W ,validators <=1/3W
-
-
-Переменные             Значения
-hash of block record   correct | incorrect
-block N                belongs to epoch E | does not belong to epoch E
-validators             have total weight <= 1/3W | have total weights >= 1/3W | vote for correct/incorrect hash record | vote for correct/ incorrect epoch | have equal weights or not | vote for block N or for incorrect block
-
-vote for a block
-
-
-type BlockCtx struct {
-	Idx     idx.Block
-	Time    inter.Timestamp
-	Atropos hash.Event
-}
-
-    highestBlock.Idx = blockIdx
-	highestBlock.Atropos = block.Atropos
-	highestBlock.Time = block.Time
-	blockproc.BlockState{
-		LastBlock:             highestBlock,
-
-	}
-
-TODO test with not random validators
-
-*/
-
 func TestBlockVotesTests(t *testing.T) {
 	const (
 		validatorsNum = 10

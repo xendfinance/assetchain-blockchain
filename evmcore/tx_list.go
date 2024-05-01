@@ -31,9 +31,11 @@ import (
 // retrieving sorted transactions from the possibly gapped future queue.
 type nonceHeap []uint64
 
-func (h nonceHeap) Len() int           { return len(h) }
+func (h nonceHeap) Len() int { return len(h) }
+
 func (h nonceHeap) Less(i, j int) bool { return h[i] < h[j] }
-func (h nonceHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+func (h nonceHeap) Swap(i, j int) { h[i], h[j] = h[j], h[i] }
 
 func (h *nonceHeap) Push(x interface{}) {
 	*h = append(*h, x.(uint64))
@@ -423,7 +425,8 @@ type priceHeap struct {
 	list    []*types.Transaction
 }
 
-func (h *priceHeap) Len() int      { return len(h.list) }
+func (h *priceHeap) Len() int { return len(h.list) }
+
 func (h *priceHeap) Swap(i, j int) { h.list[i], h.list[j] = h.list[j], h.list[i] }
 
 func (h *priceHeap) Less(i, j int) bool {

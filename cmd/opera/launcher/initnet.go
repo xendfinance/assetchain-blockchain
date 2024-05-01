@@ -13,12 +13,11 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/inter/idx"
 	"github.com/ethereum/go-ethereum/cmd/utils"
 	"github.com/ethereum/go-ethereum/crypto"
-	"gopkg.in/urfave/cli.v1"
-
-	"github.com/Fantom-foundation/go-opera/integration/makexendgenesis"
+	cli "gopkg.in/urfave/cli.v1"
 
 	"github.com/Fantom-foundation/go-opera/gossip/emitter"
 	"github.com/Fantom-foundation/go-opera/integration"
+	"github.com/Fantom-foundation/go-opera/integration/makexendgenesis"
 	"github.com/Fantom-foundation/go-opera/inter"
 	"github.com/Fantom-foundation/go-opera/inter/validatorpk"
 	"github.com/Fantom-foundation/go-opera/opera"
@@ -151,9 +150,9 @@ func newXendNetwork(ctx *cli.Context) error {
 	nettype := ctx.GlobalString(NetworkTypeFlag.Name)
 	switch nettype {
 	case "mainnet":
-		netrules = opera.XendMainNetRules()
+		netrules = opera.AssetChainMainnetRules()
 	case "testnet":
-		netrules = opera.XendTestNetRules()
+		netrules = opera.AssetChainTestnetRules()
 	case "devnet":
 		netrules = opera.XendDevNetRules()
 	default:
@@ -163,6 +162,7 @@ func newXendNetwork(ctx *cli.Context) error {
 	fmt.Println("Network rules: ", toJson(netrules))
 
 	genesisStore := makexendgenesis.XendGenesisStoreWithRulesAndStart(
+		// TODO(MIKE): FIX #8694f3z8y
 		futils.ToFtm(36000000),
 		futils.ToFtm(1000000),
 		netrules,

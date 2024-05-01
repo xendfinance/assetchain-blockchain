@@ -23,9 +23,11 @@ const (
 	londonBit              = 1 << 1
 	llrBit                 = 1 << 2
 
-	XendMainNetworkID = 0xA5B4 // 42420
-	XendTestNetworkID = 0xA5B5 // 42421
-	XendDevNetworkID  = 0xA5B6 // 42422
+	// INFO(Mike): These chain ids are subject to change
+	AssetChainName          = "Asset Chain"
+	AssetChainProdNetworkID = 0xA5B4 // 42420
+	AssetChainTestNetworkID = 0xA5B5 // 42421
+	AssetChainDevNetworkID  = 0xA5B6 // 42422
 )
 
 var DefaultVMConfig = vm.Config{

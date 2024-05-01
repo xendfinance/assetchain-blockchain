@@ -44,8 +44,10 @@ func (ee Events) Interfaces() EventIs {
 	return res
 }
 
-func (ee Events) Len() int      { return len(ee) }
+func (ee Events) Len() int { return len(ee) }
+
 func (ee Events) Swap(i, j int) { ee[i], ee[j] = ee[j], ee[i] }
+
 func (ee Events) Less(i, j int) bool {
 	return bytes.Compare(ee[i].ID().Bytes(), ee[j].ID().Bytes()) < 0
 }
@@ -79,8 +81,10 @@ func (ee EventPayloads) Bases() dag.Events {
 	return res
 }
 
-func (ee EventPayloads) Len() int      { return len(ee) }
+func (ee EventPayloads) Len() int { return len(ee) }
+
 func (ee EventPayloads) Swap(i, j int) { ee[i], ee[j] = ee[j], ee[i] }
+
 func (ee EventPayloads) Less(i, j int) bool {
 	return bytes.Compare(ee[i].ID().Bytes(), ee[j].ID().Bytes()) < 0
 }
@@ -114,8 +118,10 @@ func (ee EventIs) Bases() dag.Events {
 	return res
 }
 
-func (ee EventIs) Len() int      { return len(ee) }
+func (ee EventIs) Len() int { return len(ee) }
+
 func (ee EventIs) Swap(i, j int) { ee[i], ee[j] = ee[j], ee[i] }
+
 func (ee EventIs) Less(i, j int) bool {
 	return bytes.Compare(ee[i].ID().Bytes(), ee[j].ID().Bytes()) < 0
 }

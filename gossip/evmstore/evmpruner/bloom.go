@@ -33,11 +33,16 @@ import (
 type stateBloomHasher []byte
 
 func (f stateBloomHasher) Write(p []byte) (n int, err error) { panic("not implemented") }
-func (f stateBloomHasher) Sum(b []byte) []byte               { panic("not implemented") }
-func (f stateBloomHasher) Reset()                            { panic("not implemented") }
-func (f stateBloomHasher) BlockSize() int                    { panic("not implemented") }
-func (f stateBloomHasher) Size() int                         { return 8 }
-func (f stateBloomHasher) Sum64() uint64                     { return binary.BigEndian.Uint64(f) }
+
+func (f stateBloomHasher) Sum(b []byte) []byte { panic("not implemented") }
+
+func (f stateBloomHasher) Reset() { panic("not implemented") }
+
+func (f stateBloomHasher) BlockSize() int { panic("not implemented") }
+
+func (f stateBloomHasher) Size() int { return 8 }
+
+func (f stateBloomHasher) Sum64() uint64 { return binary.BigEndian.Uint64(f) }
 
 // stateBloom is a bloom filter used during the state convesion(snapshot->state).
 // The keys of all generated entries will be recorded here so that in the pruning

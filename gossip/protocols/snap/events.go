@@ -21,6 +21,7 @@ import "github.com/ethereum/go-ethereum/core/types"
 type DoneEvent struct {
 	Latest *types.Header
 }
+
 type (
 	StartEvent  struct{}
 	FailedEvent struct{ Err error }

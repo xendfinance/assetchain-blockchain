@@ -6,11 +6,11 @@ import (
 	"github.com/Fantom-foundation/go-opera/inter"
 )
 
-// XendMainNetRules returns mainnet rules
-func XendMainNetRules() Rules {
+// AssetChainMainnetRules returns mainnet rules
+func AssetChainMainnetRules() Rules {
 	return Rules{
-		Name:      "Xend Mainnet",
-		NetworkID: XendMainNetworkID,
+		Name:      AssetChainName,
+		NetworkID: AssetChainProdNetworkID,
 		Dag:       DefaultDagRules(),
 		Epochs:    XendNetEpochsRules(),
 		Economy:   DefaultEconomyRules(),
@@ -26,12 +26,12 @@ func XendMainNetRules() Rules {
 	}
 }
 
-// XendTestNetRules returns testnet rules
+// AssetChainTestnetRules returns testnet rules
 // equal to mainnet
-func XendTestNetRules() Rules {
+func AssetChainTestnetRules() Rules {
 	return Rules{
-		Name:      "Xend Testnet",
-		NetworkID: XendTestNetworkID,
+		Name:      AssetChainName,
+		NetworkID: AssetChainTestNetworkID,
 		Dag:       DefaultDagRules(),
 		Epochs:    XendNetEpochsRules(),
 		Economy:   DefaultEconomyRules(),
@@ -50,8 +50,8 @@ func XendTestNetRules() Rules {
 // XendDevNetRules returns devnet rules
 func XendDevNetRules() Rules {
 	return Rules{
-		Name:      "Xend Devnet",
-		NetworkID: XendDevNetworkID,
+		Name:      AssetChainName,
+		NetworkID: AssetChainDevNetworkID,
 		Dag:       DefaultDagRules(),
 		Epochs:    XendDevEpochsRules(),
 		Economy:   DefaultEconomyRules(),
