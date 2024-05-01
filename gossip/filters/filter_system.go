@@ -332,8 +332,6 @@ func (es *EventSystem) broadcast(filters filterIndex, ev interface{}) {
 	}
 }
 
-// calculateExtBlockApi doubles ethapi/PublicBlockChainAPI.calculateExtBlockApi() functionality.
-// TODO: common code.
 func (es *EventSystem) calculateExtBlockApi(h *types.Header) {
 	blkNumber := rpc.BlockNumber(h.Number.Int64())
 	if !es.backend.CalcBlockExtApi() || blkNumber == rpc.EarliestBlockNumber {

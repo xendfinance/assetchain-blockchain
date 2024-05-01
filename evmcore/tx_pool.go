@@ -1586,9 +1586,11 @@ type addressByHeartbeat struct {
 
 type addressesByHeartbeat []addressByHeartbeat
 
-func (a addressesByHeartbeat) Len() int           { return len(a) }
+func (a addressesByHeartbeat) Len() int { return len(a) }
+
 func (a addressesByHeartbeat) Less(i, j int) bool { return a[i].heartbeat.Before(a[j].heartbeat) }
-func (a addressesByHeartbeat) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
+func (a addressesByHeartbeat) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
 
 // accountSet is simply a set of addresses to check for existence, and a signer
 // capable of deriving addresses from transactions.

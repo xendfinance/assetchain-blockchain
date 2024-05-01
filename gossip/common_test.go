@@ -15,7 +15,7 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/inter/dag"
 	"github.com/Fantom-foundation/lachesis-base/inter/idx"
 	"github.com/Fantom-foundation/lachesis-base/utils/cachescale"
-	"github.com/ethereum/go-ethereum"
+	ethereum "github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
@@ -531,14 +531,24 @@ type callmsg struct {
 	ethereum.CallMsg
 }
 
-func (m callmsg) From() common.Address         { return m.CallMsg.From }
-func (m callmsg) To() *common.Address          { return m.CallMsg.To }
-func (m callmsg) GasPrice() *big.Int           { return m.CallMsg.GasPrice }
-func (m callmsg) GasTipCap() *big.Int          { return m.CallMsg.GasTipCap }
-func (m callmsg) GasFeeCap() *big.Int          { return m.CallMsg.GasFeeCap }
-func (m callmsg) Gas() uint64                  { return m.CallMsg.Gas }
-func (m callmsg) Value() *big.Int              { return m.CallMsg.Value }
-func (m callmsg) Nonce() uint64                { return 0 }
-func (m callmsg) IsFake() bool                 { return true }
-func (m callmsg) Data() []byte                 { return m.CallMsg.Data }
+func (m callmsg) From() common.Address { return m.CallMsg.From }
+
+func (m callmsg) To() *common.Address { return m.CallMsg.To }
+
+func (m callmsg) GasPrice() *big.Int { return m.CallMsg.GasPrice }
+
+func (m callmsg) GasTipCap() *big.Int { return m.CallMsg.GasTipCap }
+
+func (m callmsg) GasFeeCap() *big.Int { return m.CallMsg.GasFeeCap }
+
+func (m callmsg) Gas() uint64 { return m.CallMsg.Gas }
+
+func (m callmsg) Value() *big.Int { return m.CallMsg.Value }
+
+func (m callmsg) Nonce() uint64 { return 0 }
+
+func (m callmsg) IsFake() bool { return true }
+
+func (m callmsg) Data() []byte { return m.CallMsg.Data }
+
 func (m callmsg) AccessList() types.AccessList { return nil }

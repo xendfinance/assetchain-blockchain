@@ -1,10 +1,9 @@
 package launcher
 
 import (
+	"github.com/Fantom-foundation/lachesis-base/inter/idx"
 	"github.com/pkg/errors"
 	cli "gopkg.in/urfave/cli.v1"
-
-	"github.com/Fantom-foundation/lachesis-base/inter/idx"
 
 	"github.com/Fantom-foundation/go-opera/gossip/emitter"
 	"github.com/Fantom-foundation/go-opera/integration/makefakegenesis"

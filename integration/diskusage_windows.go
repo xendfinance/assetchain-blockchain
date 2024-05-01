@@ -18,8 +18,6 @@ package integration
 
 import (
 	"fmt"
-
-	"golang.org/x/sys/windows"
 )
 
 func getFreeDiskSpace(path string) (uint64, error) {

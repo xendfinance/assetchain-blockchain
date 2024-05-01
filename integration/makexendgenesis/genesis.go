@@ -30,19 +30,26 @@ import (
 	"github.com/Fantom-foundation/go-opera/opera/genesis"
 	"github.com/Fantom-foundation/go-opera/opera/genesis/gpos"
 	"github.com/Fantom-foundation/go-opera/opera/genesisstore"
+	futils "github.com/Fantom-foundation/go-opera/utils"
 )
 
-func XendGenesisStoreWithRulesAndStart(balance, stake *big.Int, rules opera.Rules, epoch idx.Epoch, block idx.Block, validators []gpos.Validator, genesisTime time.Time) *genesisstore.Store {
+func XendGenesisStoreWithRulesAndStart(rules opera.Rules, epoch idx.Epoch, block idx.Block, validators []gpos.Validator, genesisTime time.Time) *genesisstore.Store {
 	builder := makegenesis.NewGenesisBuilder(memorydb.NewProducer(""))
+
+	totalSupplyTarget := futils.ToFtm(200_000_000)
+	eachValidatorStake := futils.ToFtm(1_000_000)
+	freeRWA := totalSupplyTarget.Sub(totalSupplyTarget, eachValidatorStake.Mul(eachValidatorStake, new(big.Int).SetInt64(int64(len(validators)))))
+
+	builder.AddBalance(validators[0].Address, freeRWA)
 
 	// add balances to validators
 	var delegations []drivercall.Delegation
+
 	for _, val := range validators {
-		builder.AddBalance(val.Address, balance)
 		delegations = append(delegations, drivercall.Delegation{
 			Address:            val.Address,
 			ValidatorID:        val.ID,
-			Stake:              stake,
+			Stake:              eachValidatorStake,
 			LockedStake:        new(big.Int),
 			LockupFromEpoch:    0,
 			LockupEndTime:      0,

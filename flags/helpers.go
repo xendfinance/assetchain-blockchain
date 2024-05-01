@@ -80,8 +80,10 @@ type FlagGroup struct {
 // defined in AppHelpFlagGroups.
 type ByCategory []FlagGroup
 
-func (a ByCategory) Len() int      { return len(a) }
+func (a ByCategory) Len() int { return len(a) }
+
 func (a ByCategory) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
+
 func (a ByCategory) Less(i, j int) bool {
 	iCat, jCat := a[i].Name, a[j].Name
 	iIdx, jIdx := len(a), len(a) // ensure non categorized flags come last

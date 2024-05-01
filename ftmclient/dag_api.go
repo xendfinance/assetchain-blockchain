@@ -5,7 +5,7 @@ import (
 	"math/big"
 
 	"github.com/Fantom-foundation/lachesis-base/hash"
-	"github.com/ethereum/go-ethereum"
+	ethereum "github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 

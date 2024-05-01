@@ -151,6 +151,7 @@ func GetGenesisTxs(sealedEpoch idx.Epoch, validators gpos.Validators, totalSuppl
 	// initialization
 	calldata := netinitcall.InitializeAll(sealedEpoch, totalSupply, sfc.ContractAddress, sfclib.ContractAddress, driverauth.ContractAddress, driver.ContractAddress, evmwriter.ContractAddress, driverOwner)
 	internalTxs = append(internalTxs, buildTx(calldata, netinit.ContractAddress))
+
 	// push genesis validators
 	for _, v := range validators {
 		calldata := drivercall.SetGenesisValidator(v)

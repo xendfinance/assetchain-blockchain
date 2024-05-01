@@ -1,9 +1,10 @@
 package rlpstore
 
 import (
-	"github.com/Fantom-foundation/go-opera/logger"
 	"github.com/Fantom-foundation/lachesis-base/kvdb"
 	"github.com/ethereum/go-ethereum/rlp"
+
+	"github.com/Fantom-foundation/go-opera/logger"
 )
 
 type Helper struct {

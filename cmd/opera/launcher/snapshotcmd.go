@@ -31,7 +31,7 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rlp"
 	"github.com/ethereum/go-ethereum/trie"
-	"gopkg.in/urfave/cli.v1"
+	cli "gopkg.in/urfave/cli.v1"
 
 	"github.com/Fantom-foundation/go-opera/gossip/evmstore"
 	"github.com/Fantom-foundation/go-opera/gossip/evmstore/evmpruner"

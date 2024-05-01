@@ -2265,7 +2265,8 @@ func TestTransactionReplacementDynamicFee(t *testing.T) {
 
 // Tests that local transactions are journaled to disk, but remote transactions
 // get discarded between restarts.
-func TestTransactionJournaling(t *testing.T)         { testTransactionJournaling(t, false) }
+func TestTransactionJournaling(t *testing.T) { testTransactionJournaling(t, false) }
+
 func TestTransactionJournalingNoLocals(t *testing.T) { testTransactionJournaling(t, true) }
 
 func testTransactionJournaling(t *testing.T, nolocals bool) {
@@ -2452,8 +2453,10 @@ func TestTransactionSlotCount(t *testing.T) {
 
 // Benchmarks the speed of validating the contents of the pending queue of the
 // transaction pool.
-func BenchmarkPendingDemotion100(b *testing.B)   { benchmarkPendingDemotion(b, 100) }
-func BenchmarkPendingDemotion1000(b *testing.B)  { benchmarkPendingDemotion(b, 1000) }
+func BenchmarkPendingDemotion100(b *testing.B) { benchmarkPendingDemotion(b, 100) }
+
+func BenchmarkPendingDemotion1000(b *testing.B) { benchmarkPendingDemotion(b, 1000) }
+
 func BenchmarkPendingDemotion10000(b *testing.B) { benchmarkPendingDemotion(b, 10000) }
 
 func benchmarkPendingDemotion(b *testing.B, size int) {
@@ -2477,8 +2480,10 @@ func benchmarkPendingDemotion(b *testing.B, size int) {
 
 // Benchmarks the speed of scheduling the contents of the future queue of the
 // transaction pool.
-func BenchmarkFuturePromotion100(b *testing.B)   { benchmarkFuturePromotion(b, 100) }
-func BenchmarkFuturePromotion1000(b *testing.B)  { benchmarkFuturePromotion(b, 1000) }
+func BenchmarkFuturePromotion100(b *testing.B) { benchmarkFuturePromotion(b, 100) }
+
+func BenchmarkFuturePromotion1000(b *testing.B) { benchmarkFuturePromotion(b, 1000) }
+
 func BenchmarkFuturePromotion10000(b *testing.B) { benchmarkFuturePromotion(b, 10000) }
 
 func benchmarkFuturePromotion(b *testing.B, size int) {
@@ -2501,12 +2506,16 @@ func benchmarkFuturePromotion(b *testing.B, size int) {
 }
 
 // Benchmarks the speed of batched transaction insertion.
-func BenchmarkPoolBatchInsert100(b *testing.B)   { benchmarkPoolBatchInsert(b, 100, false) }
-func BenchmarkPoolBatchInsert1000(b *testing.B)  { benchmarkPoolBatchInsert(b, 1000, false) }
+func BenchmarkPoolBatchInsert100(b *testing.B) { benchmarkPoolBatchInsert(b, 100, false) }
+
+func BenchmarkPoolBatchInsert1000(b *testing.B) { benchmarkPoolBatchInsert(b, 1000, false) }
+
 func BenchmarkPoolBatchInsert10000(b *testing.B) { benchmarkPoolBatchInsert(b, 10000, false) }
 
-func BenchmarkPoolBatchLocalInsert100(b *testing.B)   { benchmarkPoolBatchInsert(b, 100, true) }
-func BenchmarkPoolBatchLocalInsert1000(b *testing.B)  { benchmarkPoolBatchInsert(b, 1000, true) }
+func BenchmarkPoolBatchLocalInsert100(b *testing.B) { benchmarkPoolBatchInsert(b, 100, true) }
+
+func BenchmarkPoolBatchLocalInsert1000(b *testing.B) { benchmarkPoolBatchInsert(b, 1000, true) }
+
 func BenchmarkPoolBatchLocalInsert10000(b *testing.B) { benchmarkPoolBatchInsert(b, 10000, true) }
 
 func benchmarkPoolBatchInsert(b *testing.B, size int, local bool) {

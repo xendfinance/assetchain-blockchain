@@ -8,7 +8,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/cmd/utils"
 	"github.com/ethereum/go-ethereum/params"
-	"gopkg.in/urfave/cli.v1"
+	cli "gopkg.in/urfave/cli.v1"
 
 	"github.com/Fantom-foundation/go-opera/gossip"
 )

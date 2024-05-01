@@ -46,7 +46,7 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/ethereum/go-ethereum/trie"
 	"github.com/syndtr/goleveldb/leveldb/opt"
-	"github.com/tyler-smith/go-bip39"
+	bip39 "github.com/tyler-smith/go-bip39"
 
 	"github.com/Fantom-foundation/go-opera/evmcore"
 	"github.com/Fantom-foundation/go-opera/gossip/gasprice"
