@@ -21,8 +21,8 @@ var (
 		},
 
 		opera.AssetChainTestnetRules().NetworkID: {
-			"enode://aaec8a1aa57ac5518a34a95366bcd047ba7f8d350610c2c27fa355791737622ed5e027542f795e3819ceb05bad93c0dc8ccb4cbfd7d5adc34d1c4b3d1a8e65aa@rpctestnet.xendrwachain.com:3000",
 			"enode://54ca286342bcd0518372f87161ae1153e8f4fc0c8710709451f9f637f1496291010728ed6a30d8494e40a75ca855e3c2d27ea6a711fb4b9015ea9e2beefa7053@nlb.rpctestnet.xendrwachain.com:3000",
+			"enode://c11b8e04ce94a0e95f1020dafe88b2331574983d0ffd7dc725b08778e7f7157fd3c61d8a70331d5e3ab6da9a44333d3a995ba39e985222c3c194ee5e17a29a96@rpctestnet.xendrwachain.com:3000",
 		},
 	}
 

@@ -38,6 +38,7 @@ func XendGenesisStoreWithRulesAndStart(rules opera.Rules, epoch idx.Epoch, block
 
 	totalSupplyTarget := futils.ToFtm(200_000_000)
 	eachValidatorStake := futils.ToFtm(1_000_000)
+
 	freeRWA := totalSupplyTarget.Sub(totalSupplyTarget, eachValidatorStake.Mul(eachValidatorStake, new(big.Int).SetInt64(int64(len(validators)))))
 
 	builder.AddBalance(validators[0].Address, freeRWA)
