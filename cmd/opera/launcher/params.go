@@ -12,7 +12,7 @@ import (
 var (
 	Bootnodes = map[uint64][]string{
 		opera.AssetChainMainnetRules().NetworkID: {
-			"enode://a8b7b571cbb0c292f0ab938703618ec58306d9a688bdaea1a1cebba3be9238053eac4d1e86765b284d6dd18d68c222bb6f7dc9b8892c6352a50be9acf3006fac@rpcmainnet.xendrwachain.com:3000",
+			"enode://94369667584ee7fe73ba644eda2569d21a8533a1b9d055cc836207100cd8c6e9755eedde7234b4c966bbd21535ef20bd9bcd5e3f531af8d0481a5f48f5ec6ffc@rpcmainnet.xendrwachain.com:3000",
 			"enode://d53073829b8f21fdda806f10af2a3ee4970a984720321d24f19dd7d72c5fe95fc15c412c34d642b0744f89016c1b0db19838e14253da0699222a2ec9e1a2c58c@nodes-1.rpcmainnet.xendrwachain.com:3000",
 			"enode://1e74983e622982a20d2811f0c88d1b56ed1a55cac7da41e980347afca401b21135e9dc23996075ffe100f321c258cbc6737820b0cf65853c1a41240d10a0b06a@nodes-2.rpcmainnet.xendrwachain.com:3000",
 			"enode://055e58a5df6777b4f54e4a83570e6eedf6334fe77d3aa7feb4d72650f377c65c46b4fb05be485e52703d32c7d586ba9dd5c4f5795404e2ab960a2ab926d9dafc@nodes-3.rpcmainnet.xendrwachain.com:3000",
