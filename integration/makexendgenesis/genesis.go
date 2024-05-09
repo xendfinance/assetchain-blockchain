@@ -36,8 +36,8 @@ import (
 func XendGenesisStoreWithRulesAndStart(rules opera.Rules, epoch idx.Epoch, block idx.Block, validators []gpos.Validator, genesisTime time.Time) *genesisstore.Store {
 	builder := makegenesis.NewGenesisBuilder(memorydb.NewProducer(""))
 
-	totalSupplyTarget := futils.ToFtm(200_000_000)
-	eachValidatorStake := futils.ToFtm(1_000_000)
+	totalSupplyTarget := futils.ToFtm(100_000_000)
+	eachValidatorStake := futils.ToFtm(200_000) // 200 * 5 = 1_000_000
 
 	freeRWA := totalSupplyTarget.Sub(totalSupplyTarget, eachValidatorStake.Mul(eachValidatorStake, new(big.Int).SetInt64(int64(len(validators)))))
 
