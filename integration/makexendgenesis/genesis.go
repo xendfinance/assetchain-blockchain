@@ -36,12 +36,12 @@ import (
 func XendGenesisStoreWithRulesAndStart(rules opera.Rules, epoch idx.Epoch, block idx.Block, validators []gpos.Validator, genesisTime time.Time) *genesisstore.Store {
 	builder := makegenesis.NewGenesisBuilder(memorydb.NewProducer(""))
 
-	totalSupplyTarget := futils.ToFtm(100_000_000)
-	eachValidatorStake := futils.ToFtm(200_000) // 200 * 5 = 1_000_000
+	/// 100 mil. - target
+	// 200k * vals_n = 1 mil. = each staked
+	eachValidatorStake := futils.ToFtm(1_000_000) // 200 * 5 = 1_000_000
+	validatorBalance := futils.ToFtm(95_000_000)
 
-	freeRWA := totalSupplyTarget.Sub(totalSupplyTarget, eachValidatorStake.Mul(eachValidatorStake, new(big.Int).SetInt64(int64(len(validators)))))
-
-	builder.AddBalance(validators[0].Address, freeRWA)
+	builder.AddBalance(validators[0].Address, validatorBalance)
 
 	// add balances to validators
 	var delegations []drivercall.Delegation
@@ -94,8 +94,8 @@ func XendGenesisStoreWithRulesAndStart(rules opera.Rules, epoch idx.Epoch, block
 			},
 			EpochState: iblockproc.EpochState{
 				Epoch:             epoch - 1,
-				EpochStart:        inter.Timestamp(genesisTime.Unix()),
-				PrevEpochStart:    inter.Timestamp(genesisTime.Unix() - 1),
+				EpochStart:        inter.FromUnix(time.Now().Unix()),
+				PrevEpochStart:    inter.FromUnix(time.Now().Unix()),
 				EpochStateRoot:    hash.Zero,
 				Validators:        pos.NewBuilder().Build(),
 				ValidatorStates:   make([]iblockproc.ValidatorEpochState, 0),
@@ -106,10 +106,7 @@ func XendGenesisStoreWithRulesAndStart(rules opera.Rules, epoch idx.Epoch, block
 		Idx: epoch - 1,
 	})
 
-	var owner common.Address
-	if len(validators) != 0 {
-		owner = validators[0].Address
-	}
+	owner := validators[0].Address
 
 	blockProc := makegenesis.DefaultBlockProc()
 	genesisTxs := GetGenesisTxs(epoch-2, validators, builder.TotalSupply(), delegations, owner)
