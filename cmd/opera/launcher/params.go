@@ -12,17 +12,19 @@ import (
 var (
 	Bootnodes = map[uint64][]string{
 		opera.AssetChainMainnetRules().NetworkID: {
-			"enode://94369667584ee7fe73ba644eda2569d21a8533a1b9d055cc836207100cd8c6e9755eedde7234b4c966bbd21535ef20bd9bcd5e3f531af8d0481a5f48f5ec6ffc@rpcmainnet.xendrwachain.com:3000",
-			"enode://d53073829b8f21fdda806f10af2a3ee4970a984720321d24f19dd7d72c5fe95fc15c412c34d642b0744f89016c1b0db19838e14253da0699222a2ec9e1a2c58c@nodes-1.rpcmainnet.xendrwachain.com:3000",
-			"enode://1e74983e622982a20d2811f0c88d1b56ed1a55cac7da41e980347afca401b21135e9dc23996075ffe100f321c258cbc6737820b0cf65853c1a41240d10a0b06a@nodes-2.rpcmainnet.xendrwachain.com:3000",
-			"enode://055e58a5df6777b4f54e4a83570e6eedf6334fe77d3aa7feb4d72650f377c65c46b4fb05be485e52703d32c7d586ba9dd5c4f5795404e2ab960a2ab926d9dafc@nodes-3.rpcmainnet.xendrwachain.com:3000",
-			"enode://8572091416d2f9edc13e161b70f6c31ce2d39744e6afde710868f3bce71c2c80514098f4ea6df17683995d6fd9373e382a19cbc7471cc5a7b96982475eb1cb60@nodes-4.rpcmainnet.xendrwachain.com:3000",
-			"enode://81a0595ca25a2aab64aed73be0a20a705f45c90955591fcdf6ad4a904599040c4ecc5d153543b99fcad2cbb03f566f1a771b134cbeff58cef32786ce99993028@nodes-5.rpcmainnet.xendrwachain.com:3000",
+			"enode://d4aefe078fb585b8b5bf0611e9c408d71a321eab00d74f4edfba1b5db09b6ae24721ddf639cb5be11b9b2a8e6d8e1e4987ac013f500c2902c3916acde8030a7c@nodes-3.rpcmainnet.xendrwachain.com:3000",
+			"enode://4f2d722dedbf36999b0aa7698fd7a345a0a31ecb408c13c574a963f17fb6bcb74dbeeec57d70a350fd088cba6d22a51212c9bccb84c5e8631710483fcfac5b93@nodes-2.rpcmainnet.xendrwachain.com:3000",
+			"enode://fc22780489d26d92e2e1ed0be5bbb68d947ee7742f800c663c8bd91eb64e687a6ed1f962fb9db0e6af38075d16f0716245b074efbab6d0a7418796cc1904b844@nodes-5.rpcmainnet.xendrwachain.com:3000",
+			"enode://3ef14e9c1547204856d3ea4380edb4c6c3a258c9497a7c3b02850a254969abf47d25c48c4ec444099fe560355a0fd36e911e3b95aa742fe8267e099ef2b06858@nodes-4.rpcmainnet.xendrwachain.com:3000",
+			"enode://ca6b5af34617013bf1272e052bbf570fda2827affce1cc50d3ba4b55df32163ace111f0859af55c46b6ecf8b7ab3b94f47ad2e423c5439edf09e1bdabf56bf05@nodes-1.rpcmainnet.xendrwachain.com:3000",
 		},
 
 		opera.AssetChainTestnetRules().NetworkID: {
-			"enode://54ca286342bcd0518372f87161ae1153e8f4fc0c8710709451f9f637f1496291010728ed6a30d8494e40a75ca855e3c2d27ea6a711fb4b9015ea9e2beefa7053@nlb.rpctestnet.xendrwachain.com:3000",
-			"enode://c11b8e04ce94a0e95f1020dafe88b2331574983d0ffd7dc725b08778e7f7157fd3c61d8a70331d5e3ab6da9a44333d3a995ba39e985222c3c194ee5e17a29a96@rpctestnet.xendrwachain.com:3000",
+			"enode://d4aefe078fb585b8b5bf0611e9c408d71a321eab00d74f4edfba1b5db09b6ae24721ddf639cb5be11b9b2a8e6d8e1e4987ac013f500c2902c3916acde8030a7c@nodes-3.rpcmainnet.xendrwachain.com:3000",
+			"enode://4f2d722dedbf36999b0aa7698fd7a345a0a31ecb408c13c574a963f17fb6bcb74dbeeec57d70a350fd088cba6d22a51212c9bccb84c5e8631710483fcfac5b93@nodes-2.rpcmainnet.xendrwachain.com:3000",
+			"enode://fc22780489d26d92e2e1ed0be5bbb68d947ee7742f800c663c8bd91eb64e687a6ed1f962fb9db0e6af38075d16f0716245b074efbab6d0a7418796cc1904b844@nodes-5.rpcmainnet.xendrwachain.com:3000",
+			"enode://3ef14e9c1547204856d3ea4380edb4c6c3a258c9497a7c3b02850a254969abf47d25c48c4ec444099fe560355a0fd36e911e3b95aa742fe8267e099ef2b06858@nodes-4.rpcmainnet.xendrwachain.com:3000",
+			"enode://ca6b5af34617013bf1272e052bbf570fda2827affce1cc50d3ba4b55df32163ace111f0859af55c46b6ecf8b7ab3b94f47ad2e423c5439edf09e1bdabf56bf05@nodes-1.rpcmainnet.xendrwachain.com:3000",
 		},
 	}
 

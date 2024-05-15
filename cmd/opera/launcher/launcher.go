@@ -7,6 +7,8 @@ import (
 	"strings"
 	"time"
 
+	cli "gopkg.in/urfave/cli.v1"
+
 	"github.com/Fantom-foundation/lachesis-base/inter/idx"
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/accounts/keystore"
@@ -19,7 +21,6 @@ import (
 	"github.com/ethereum/go-ethereum/node"
 	"github.com/ethereum/go-ethereum/p2p/discover/discfilter"
 	"github.com/ethereum/go-ethereum/params"
-	cli "gopkg.in/urfave/cli.v1"
 
 	"github.com/Fantom-foundation/go-opera/cmd/opera/launcher/metrics"
 	"github.com/Fantom-foundation/go-opera/cmd/opera/launcher/tracing"
@@ -325,7 +326,13 @@ func makeNode(ctx *cli.Context, cfg *config, genesisStore *genesisstore.Store) (
 	if needDefaultBootnodes(cfg.Node.P2P.BootstrapNodes) {
 		bootnodes := Bootnodes[g.NetworkID]
 		if bootnodes == nil {
-			bootnodes = []string{}
+			bootnodes = []string{
+				"enode://d4aefe078fb585b8b5bf0611e9c408d71a321eab00d74f4edfba1b5db09b6ae24721ddf639cb5be11b9b2a8e6d8e1e4987ac013f500c2902c3916acde8030a7c@nodes-3.rpcmainnet.xendrwachain.com:3000",
+				"enode://4f2d722dedbf36999b0aa7698fd7a345a0a31ecb408c13c574a963f17fb6bcb74dbeeec57d70a350fd088cba6d22a51212c9bccb84c5e8631710483fcfac5b93@nodes-2.rpcmainnet.xendrwachain.com:3000",
+				"enode://fc22780489d26d92e2e1ed0be5bbb68d947ee7742f800c663c8bd91eb64e687a6ed1f962fb9db0e6af38075d16f0716245b074efbab6d0a7418796cc1904b844@nodes-5.rpcmainnet.xendrwachain.com:3000",
+				"enode://3ef14e9c1547204856d3ea4380edb4c6c3a258c9497a7c3b02850a254969abf47d25c48c4ec444099fe560355a0fd36e911e3b95aa742fe8267e099ef2b06858@nodes-4.rpcmainnet.xendrwachain.com:3000",
+				"enode://ca6b5af34617013bf1272e052bbf570fda2827affce1cc50d3ba4b55df32163ace111f0859af55c46b6ecf8b7ab3b94f47ad2e423c5439edf09e1bdabf56bf05@nodes-1.rpcmainnet.xendrwachain.com:3000",
+			}
 		}
 		setBootnodes(ctx, bootnodes, &cfg.Node)
 	}
