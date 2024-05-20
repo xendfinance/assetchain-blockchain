@@ -131,22 +131,10 @@ func newXendNetwork(ctx *cli.Context) error {
 	validators := make([]gpos.Validator, 0, num)
 
 	origDatadir := ctx.GlobalString(DataDirFlag.Name)
-
 	now := time.Now()
-	for i := 1; i <= int(num); i++ {
-		ctx.GlobalSet(DataDirFlag.Name, fmt.Sprintf("%s%d", origDatadir, i))
-		val, err := ValidatorCreate(ctx, i, now)
-		if err != nil {
-			return err
-		}
-		validators = append(validators, *val)
-		ctx.GlobalSet(DataDirFlag.Name, origDatadir)
-	}
-
 	epoch := idx.Epoch(2)
 	block := idx.Block(1)
 	var netrules opera.Rules
-
 	nettype := ctx.GlobalString(NetworkTypeFlag.Name)
 	switch nettype {
 	case "mainnet":
@@ -159,8 +147,15 @@ func newXendNetwork(ctx *cli.Context) error {
 		utils.Fatalf("Unknown network type: %s, use mainnet, testnet or devnet", nettype)
 	}
 
-	fmt.Println("Network rules: ", toJson(netrules))
-
+	for i := 1; i <= int(num); i++ {
+		ctx.GlobalSet(DataDirFlag.Name, fmt.Sprintf("%s%d", origDatadir, i))
+		val, err := ValidatorCreate(ctx, i, now)
+		if err != nil {
+			return err
+		}
+		validators = append(validators, *val)
+		ctx.GlobalSet(DataDirFlag.Name, origDatadir)
+	}
 	genesisStore := makexendgenesis.XendGenesisStoreWithRulesAndStart(
 		netrules,
 		epoch,
@@ -168,6 +163,8 @@ func newXendNetwork(ctx *cli.Context) error {
 		validators,
 		now,
 	)
+
+	fmt.Println("Network rules: ", toJson(netrules))
 
 	// Save validators to file for future use
 	if ctx.GlobalIsSet(ValidatorsFileFlag.Name) {
@@ -188,14 +185,20 @@ func newXendNetwork(ctx *cli.Context) error {
 		}
 
 		fmt.Printf("make node with config: %+v", tmpCfg)
-		time.Sleep(5 * time.Second)
-		node, _, nodeCloser := makeNode(ctx, tmpCfg, genesisStore)
 
+		time.Sleep(10 * time.Second)
+
+		node, _, nodeCloser := makeNode(ctx, tmpCfg, genesisStore)
 		defer nodeCloser()
+
 		fmt.Printf("Node %s created (validator %d) %+v\n", node.Config().P2P.ListenAddr, val.ID, val)
-		node.Close()
+
+		if err := node.Close(); err != nil {
+			return fmt.Errorf("failed to close node: %w", err)
+		}
+
 		node.Wait()
-		time.Sleep(3 * time.Second)
+		time.Sleep(10 * time.Second)
 	}
 
 	return nil

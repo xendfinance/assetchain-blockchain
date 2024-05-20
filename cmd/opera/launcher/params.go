@@ -10,18 +10,18 @@ import (
 )
 
 var (
-	// TODO(prod-deployment): Research bootnodes usage & fix hardcoded paths
 	Bootnodes = map[uint64][]string{
 		opera.AssetChainMainnetRules().NetworkID: {
-			"enode://60792ba55d984a46f0a2ba469089de6ca16dfad812a621944f70248e02208c23ddf8f823fb05c12b5d36964f38d73055a89e32b5d19c90495a10470b60e37512@rpctestnet.xendrwachain.com:3000",
-			// "enode://9009824396c6c2fbe976481ad07f92d5cb696e59a9a35fb20ef318452ba77e58b3f5d8903062ecc49a4cc6630d6250967e3fd44dec8f1ac2903440018891c164@nodes-2.xendchain-rpc.com:3000",
-			// "enode://56f1707fd0460654840d2ad726e9bafa653cc0b39289a2d838530a44b355b9927ebe7db99222d3a9aed977ad0c193e56e0a774c80f19bae6344dce758f81a6de@nodes-3.xendchain-rpc.com:3000",
-			// "enode://a9ff87401f8c19715ceaa618ebe0d68e76b82ae57a19d8c792cb25637b7edf8a4e9d9cd933cde47102acc2cb5a6d79dd1d01c162e85a9d4d9dac89f9b4e1bbd1@nodes-4.xendchain-rpc.com:3000",
-			// "enode://da2917206f04de4c1a18d66ebbdc7d1e6c74e892a39762280634dc5c45602c5ce1a325016ec2225fe2eb1957f81602a0b4fa1ac9ccb49d9c600399b4ff3b78a1@nodes-5.xendchain-rpc.com:3000",
+			"enode://d4aefe078fb585b8b5bf0611e9c408d71a321eab00d74f4edfba1b5db09b6ae24721ddf639cb5be11b9b2a8e6d8e1e4987ac013f500c2902c3916acde8030a7c@nodes-3.rpcmainnet.xendrwachain.com:3000",
+			"enode://4f2d722dedbf36999b0aa7698fd7a345a0a31ecb408c13c574a963f17fb6bcb74dbeeec57d70a350fd088cba6d22a51212c9bccb84c5e8631710483fcfac5b93@nodes-2.rpcmainnet.xendrwachain.com:3000",
+			"enode://fc22780489d26d92e2e1ed0be5bbb68d947ee7742f800c663c8bd91eb64e687a6ed1f962fb9db0e6af38075d16f0716245b074efbab6d0a7418796cc1904b844@nodes-5.rpcmainnet.xendrwachain.com:3000",
+			"enode://3ef14e9c1547204856d3ea4380edb4c6c3a258c9497a7c3b02850a254969abf47d25c48c4ec444099fe560355a0fd36e911e3b95aa742fe8267e099ef2b06858@nodes-4.rpcmainnet.xendrwachain.com:3000",
+			"enode://ca6b5af34617013bf1272e052bbf570fda2827affce1cc50d3ba4b55df32163ace111f0859af55c46b6ecf8b7ab3b94f47ad2e423c5439edf09e1bdabf56bf05@nodes-1.rpcmainnet.xendrwachain.com:3000",
 		},
 
 		opera.AssetChainTestnetRules().NetworkID: {
-			"enode://60792ba55d984a46f0a2ba469089de6ca16dfad812a621944f70248e02208c23ddf8f823fb05c12b5d36964f38d73055a89e32b5d19c90495a10470b60e37512@rpctestnet.xendrwachain.com:3000",
+			"enode://aaec8a1aa57ac5518a34a95366bcd047ba7f8d350610c2c27fa355791737622ed5e027542f795e3819ceb05bad93c0dc8ccb4cbfd7d5adc34d1c4b3d1a8e65aa@rpctestnet.xendrwachain.com:3000",
+			"enode://54ca286342bcd0518372f87161ae1153e8f4fc0c8710709451f9f637f1496291010728ed6a30d8494e40a75ca855e3c2d27ea6a711fb4b9015ea9e2beefa7053@nlb.rpctestnet.xendrwachain.com:3000",
 		},
 	}
 
