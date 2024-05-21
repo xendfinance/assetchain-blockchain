@@ -2,7 +2,7 @@
 .DS_Store
 *.txt
 */.prettierd/
-
+!vendor
 # IDE
 .vscode
 .idea/
@@ -23,7 +23,6 @@ build
 dist
 
 # Dependencies
-vendor
 glide.lock
 
 # patches and diff files
