@@ -1,134 +1,120 @@
-# xend-blockchain
+# AssetChain Blockchain
 
-EVM-compatible chain secured by the Lachesis consensus algorithm.
+This repository contains all resources required to set up a validator node in the AssetChain Blockchain.
 
-## Building the source
+## Table of Contents
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
 
-Building `xend-blockchain` requires both a Go (version 1.14 or later) and a C compiler. You can install
-them using your favourite package manager. Once the dependencies are installed, run
+## Requirements
 
-```shell
-make xend-blockchain
-```
-The build output is ```build/xend-blockchain``` executable.
+The requirements for running a validator node are shown below:
 
-## Running `xend-blockchain`
+1. **Minimum Stake**: 200,000 RWA
+2. **Maximum Validator Size**: 15x the self-stake amount
+3. **Minimum Hardware Requirements**: AWS EC2 m5.xlarge with 4 vCPUs (3.1 GHz) and at least 1 TB of Amazon EBS General Purpose SSD (gp2) storage (or equivalent).
+4. **Recommended Specifications**: For better performance, consider using AWS m6i.2xlarge, c6i.4xlarge, or bare metal with equivalent or higher specs.
+5. **Rewards**: Currently ~6% APY (Normal APY on self-stake + 15% of delegators' rewards). APY varies based on staked percentage.
 
-Going through all the possible command line flags is out of scope here,
-but we've enumerated a few common parameter combos to get you up to speed quickly
-on how you can run your own `xend-blockchain` instance.
+## Getting Started
 
-### Launching a network
+To get started, follow the steps below:
 
-Launching `xend-blockchain` readonly (non-validator) node for network specified by the genesis file:
+1. **Launch Cloud Instance**:
+   - You can either run a node on your own hardware or use a cloud provider. We recommend using one of the major cloud providers, such as Amazon AWS.
+   - We recommend using Ubuntu Server 22.04 LTS (64-bit).
 
-```shell
-$ xend-blockchain --genesis file.g
-```
+2. **Network Settings**:
+   - Open up port 22 or any other port of preference for SSH.
+   - Open up port 5050 for both TCP and UDP traffic. Alternatively, use the `--port <port>` flag to specify a custom port when running your node.
 
-### Configuration
+3. **Set up a Non-Root User**:
+   - SSH into your machine:
+     ```bash
+     ssh root@{VALIDATOR_IP_ADDRESS}
+     ```
+   - Update the system:
+     ```bash
+     sudo apt-get update && sudo apt-get upgrade -y
+     ```
+   - Create a non-root user:
+     ```bash
+     USER={USERNAME}
+     sudo mkdir -p /home/$USER/.ssh
+     sudo touch /home/$USER/.ssh/authorized_keys
+     sudo useradd -d /home/$USER $USER
+     sudo usermod -aG sudo $USER
+     sudo chown -R $USER:$USER /home/$USER/
+     sudo chmod 700 /home/$USER/.ssh
+     sudo chmod 644 /home/$USER/.ssh/authorized_keys
+     ```
+   - Add your SSH public key to the new user's `authorized_keys` file.
 
-As an alternative to passing the numerous flags to the `xend-blockchain` binary, you can also pass a
-configuration file via:
+4. **Install Required Tools**:
+   - Install build tools:
+     ```bash
+     sudo apt install apt-transport-https libc-bin gcc git musl ca-certificates curl zsh make unzip build-essential gawk wget bison flex
+     ```
+   - Install Go:
+     ```bash
+     wget https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
+     sudo tar -xvf go1.22.0.linux-amd64.tar.gz
+     sudo mv go /usr/local
+     export GOROOT=/usr/local/go
+     export GOPATH=$HOME/go
+     export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+     source ~/.profile
+     exec bash
+     ```
 
-```shell
-$ xend-blockchain --config /path/to/your_config.toml
-```
+5. **Install and Set Up Opera**:
+   - Clone the Opera repository and build:
+     ```bash
+     git clone https://github.com/xendfinance/xend-node
+     cd xend-node/
+     go clean -modcache
+     go mod tidy
+     export GOPROXY="https://proxy.golang.org"
+     mkdir -pv build/opera
+     go build -v -o build/opera ./cmd/opera
+     ```
 
-To get an idea how the file should look like you can use the `dumpconfig` subcommand to
-export your existing configuration:
+6. **Start Opera Node**:
+   - Download the genesis file and start the node:
+     ```bash
+     curl https://xend-testnet-genesis.s3.amazonaws.com/genesis.g --output genesis.g
+     cd build/
+     nohup ./opera --port 3000 --nat any --genesis ../genesis.g --http --http.addr="0.0.0.0" --http.port=4000 --http.corsdomain=* --http.vhosts=* --http.api=ethdebugnetadminweb3personaltxpoolftmdag --bootnodes="enode://aaec8a1aa57ac5518a34a95366bcd047ba7f8d350610c2c27fa355791737622ed5e027542f795e3819ceb05bad93c0dc8ccb4cbfd7d5adc34d1c4b3d1a8e65aa@rpctestnet.xendrwachain.com:3000" > opera.log &
+     ```
 
-```shell
-$ xend-blockchain --your-favourite-flags dumpconfig
-```
+7. **Create and Fund Validator Wallet**:
+   - Create a validator wallet:
+     ```bash
+     ./opera account new
+     ```
+   - Fund the wallet with at least 200,000 RWA.
 
-#### Validator
+8. **Register Your Validator**:
+   - Unlock the validator wallet and register:
+     ```bash
+     personal.unlockAccount("{VALIDATOR_WALLET_ADDRESS}" "{PASSWORD}" 60)
+     tx = sfcc.createValidator("0xYOUR_PUBKEY" {from:"0xYOUR_ADDRESS" value: web3.toWei("200000.0" "ftm")})
+     ```
 
-New validator private key may be created with `xend-blockchain validator new` command.
+## Contributing
 
-To launch a validator, you have to use `--validator.id` and `--validator.pubkey` flags to enable events emitter.
+See [CONTRIBUTING.md](https://github.com/xendfinance/nodesale/CONTRIBUTING.md) for contribution and pull request protocol. We expect contributors to follow our guide when submitting code or comments.
 
-```shell
-$ xend-blockchain --nousb --validator.id YOUR_ID --validator.pubkey 0xYOUR_PUBKEY
-```
+## License
 
-`xend-blockchain` will prompt you for a password to decrypt your validator private key. Optionally, you can
-specify password with a file using `--validator.password` flag.
+[![License: GPL v3.0](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-#### Participation in discovery
+This project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.
 
-Optionally you can specify your public IP to straighten connectivity of the network.
-Ensure your TCP/UDP p2p port (5050 by default) isn't blocked by your firewall.
+## Support
 
-```shell
-$ xend-blockchain --nat extip:1.2.3.4
-```
-
-## Dev
-
-### Running testnet
-
-The network is specified only by its genesis file, so running a testnet node is equivalent to
-using a testnet genesis file instead of a mainnet genesis file:
-```shell
-$ xend-blockchain --genesis /path/to/testnet.g # launch node
-```
-
-It may be convenient to use a separate datadir for your testnet node to avoid collisions with other networks:
-```shell
-$ xend-blockchain --genesis /path/to/testnet.g --datadir /path/to/datadir # launch node
-$ xend-blockchain --datadir /path/to/datadir account new # create new account
-$ xend-blockchain --datadir /path/to/datadir attach # attach to IPC
-```
-
-### Testing
-
-Lachesis has extensive unit-testing. Use the Go tool to run tests:
-```shell
-go test ./...
-```
-
-If everything goes well, it should output something along these lines:
-```
-
-### xend-blockchainting a private network (fakenet)
-
-Fakenet is a private network optimized for your private testing.
-It'll generate a genesis containing N validators with equal stakes.
-To launch a validator in this network, all you need to do is specify a validator ID you're willing to launch.
-
-Pay attention that validator's private keys are deterministically generated in this network, so you must use it only for private testing.
-
-Maintaining your own private network is more involved as a lot of configurations taken for
-granted in the official networks need to be manually set up.
-
-To run the fakenet with just one validator (which will work practically as a PoA blockchain), use:
-```shell
-$ xend-blockchain --fakenet 1/1
-```
-
-To run the fakenet with 5 validators, run the command for each validator:
-```shell
-$ xend-blockchain --fakenet 1/5 # first node, use 2/5 for second node
-```
-
-If you have to launch a non-validator node in fakenet, use 0 as ID:
-```shell
-$ xend-blockchain --fakenet 0/5
-```
-
-After that, you have to connect your nodes. Either connect them statically or specify a bootnode:
-```shell
-$ xend-blockchain --fakenet 1/5 --bootnodes "enode://verylonghex@1.2.3.4:5050"
-```
-
-### Running the demo
-
-For the testing purposes, the full demo may be launched using:
-```shell
-cd demo/
-./start.sh # start the xend-blockchain processes
-./stop.sh # stop the demo
-./clean.sh # erase the chain data
-```
-Check README.md in the demo directory for more information.
+For questions or suggestions, just say Hi on [Telegram](https://t.me/xendfinancedevs).  
+We're always glad to help.
