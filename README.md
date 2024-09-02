@@ -73,8 +73,8 @@ To get started, follow the steps below:
 5. **Install and Set Up Opera**:
    - Clone the Opera repository and build:
      ```bash
-     git clone https://github.com/xendfinance/xend-node
-     cd xend-node/
+     git clone https://github.com/xendfinance/assetchain-blockchain
+     cd assetchain-blockchain/
      go clean -modcache
      go mod tidy
      export GOPROXY="https://proxy.golang.org"
@@ -85,9 +85,9 @@ To get started, follow the steps below:
 6. **Start Opera Node**:
    - Download the genesis file and start the node:
      ```bash
-     curl https://xend-testnet-genesis.s3.amazonaws.com/genesis.g --output genesis.g
+     curl https://asset-testnet.assetchain.org/genesis_new.g --output genesis.g
      cd build/
-     nohup ./opera --port 3000 --nat any --genesis ../genesis.g --http --http.addr="0.0.0.0" --http.port=4000 --http.corsdomain=* --http.vhosts=* --http.api=ethdebugnetadminweb3personaltxpoolftmdag --bootnodes="enode://aaec8a1aa57ac5518a34a95366bcd047ba7f8d350610c2c27fa355791737622ed5e027542f795e3819ceb05bad93c0dc8ccb4cbfd7d5adc34d1c4b3d1a8e65aa@rpctestnet.xendrwachain.com:3000" > opera.log &
+     nohup ./opera --port 3000 --nat any --genesis ../genesis.g --http --http.addr="0.0.0.0" --http.port=4000 --http.corsdomain=* --http.vhosts=* --http.api=ethdebugnetadminweb3personaltxpoolftmdag --bootnodes="enode://27c5f90bd11d2e5df3901c8f893cfcbe0e62c0edfda88170eff43a87eb54c333a1ddce3dc6765eeeccfd37f01e614373e2d0449512735e4a96f528ea53e87ddf@34.147.162.187:3000" > opera.log &
      ```
 
 7. **Create and Fund Validator Wallet**:
@@ -97,12 +97,57 @@ To get started, follow the steps below:
      ```
    - Fund the wallet with at least 200,000 RWA.
 
-8. **Register Your Validator**:
-   - Unlock the validator wallet and register:
+8. **Create a new validator key**:
+    - Create a validator key:
      ```bash
-     personal.unlockAccount("{VALIDATOR_WALLET_ADDRESS}" "{PASSWORD}" 60)
-     tx = sfcc.createValidator("0xYOUR_PUBKEY" {from:"0xYOUR_ADDRESS" value: web3.toWei("200000.0" "ftm")})
+     ./opera validator new
      ```
+     ![alt text](image.png)
+
+9. **Create your validator via the SFC**:
+   - Initialize the SFC contract ABI variable found [here](abi/sfcc.js)
+   ```bash
+      # Attach to opera console
+      (validator)$ ./opera attach opera.ipc
+      Parse to javascript terminal everything from abi.sfcc.js
+      sfcc = web3.ftm.contract(abi).at("0xfc00face00000000000000000000000000000000")
+   ```
+
+10. **Sanity Check**:
+    
+   ```bash
+      # After initializing both variables, you can now interact with the network’s SFC. Enter the following command to check that everything works as expected:
+      (validator)$ # Sanity check
+      sfcc.lastValidatorID() # if everything is all right, will return a non-zero value
+      sfcc.getValidatorID("{VALIDATOR_WALLET_ADDRESS}") # This should return 0, as you are not registered as a validator yet:
+   ```
+
+11. **Unlock and register validator**
+    - Unlock the validator wallet and register:
+      ```bash
+      personal.unlockAccount("{VALIDATOR_WALLET_ADDRESS}" "{PASSWORD}" 60)
+      tx = sfcc.createValidator("0xYOUR_PUBKEY" {from:"0xYOUR_ADDRESS" value: web3.toWei("200000.0" "ftm")}) # 200000.0 RWA
+      ```
+    - Check your registration transaction
+    ```bash
+      ftm.getTransactionReceipt(tx) # Look for the status: “0x1” at the bottom, which means the transaction was successful:
+     ```
+     You can also copy the transactionHash and go the AssetChain BlockScaner and check your transaction there:
+     https://scan-testnet.assetchain.org/tx/[YOURTX]
+
+    - Check your validator status again
+    ```bash
+      (validator)$ sfcc.getValidatorID("{VALIDATOR_WALLET_ADDRESS}") # It should now return something other than “0”:
+    ```
+
+
+12. **Run your AssetChain validator Node**
+    - Start the node in validator mode:
+    ```bash
+    (validator)$ nohup ./opera --bootnodes  enode://27c5f90bd11d2e5df3901c8f893cfcbe0e62c0edfda88170eff43a87eb54c333a1ddce3dc6765eeeccfd37f01e614373e2d0449512735e4a96f528ea53e87ddf@34.147.162.187:3000 --validator.id ID --validator.pubkey 0xPubkey --validator.password /path/to/password > validator.log &
+    ```
+
+
 
 ## Contributing
 
