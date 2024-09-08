@@ -89,6 +89,7 @@ To get started, follow the steps below:
      cd build/
      nohup ./opera --port 3000 --nat any --genesis.allowExperimental --genesis ../genesis.g --http --http.addr="0.0.0.0" --http.port=4000 --http.corsdomain=* --http.vhosts=* --http.api=eth,debug,net,admin,web3,personal,txpool,ftm,dag --bootnodes="enode://27c5f90bd11d2e5df3901c8f893cfcbe0e62c0edfda88170eff43a87eb54c333a1ddce3dc6765eeeccfd37f01e614373e2d0449512735e4a96f528ea53e87ddf@34.147.162.187:3000" > opera.log &
      ```
+     N:B if you only want to run fullnode for rpc then you can stop here.
 
 7. **Create and Fund Validator Wallet**:
    - Create a validator wallet:
