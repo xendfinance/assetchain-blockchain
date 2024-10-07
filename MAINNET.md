@@ -1,11 +1,8 @@
 # AssetChain Blockchain
 
-This repository contains all resources required to set up a validator node in the AssetChain Blockchain.
+This repository contains all resources required to set up a validator node for mainnet on AssetChain Blockchain.
 
 ## Table of Contents
-
-- [Full Node](#full-node)
-- [Mainnet](#mainnet)
 - [Requirements](#requirements)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
@@ -15,10 +12,6 @@ This repository contains all resources required to set up a validator node in th
 ## Full Node
 
 To set up a full node, follow the steps in the [Full Node](FULLNODE.md) guide.
-
-## Mainnet
-
-To set up a validator node for mainnet, follow the steps in the [Mainnet](MAINNET.md) guide.
 
 ## Requirements
 
@@ -96,10 +89,11 @@ To get started, follow the steps below:
 6. **Start Opera Node**:
    - Download the genesis file and start the node:
      ```bash
-     curl https://asset-testnet.assetchain.org/genesis_new.g --output genesis.g
+     curl https://asset.assetchain.org/genesis_new.g --output genesis.g
      cd build/
-     nohup ./opera --port 3000 --nat any --genesis.allowExperimental --genesis ../genesis.g --http --http.addr="0.0.0.0" --http.port=4000 --http.corsdomain=* --http.vhosts=* --http.api=eth,debug,net,admin,web3,personal,txpool,ftm,dag --bootnodes="enode://27c5f90bd11d2e5df3901c8f893cfcbe0e62c0edfda88170eff43a87eb54c333a1ddce3dc6765eeeccfd37f01e614373e2d0449512735e4a96f528ea53e87ddf@34.147.162.187:3000" > opera.log &
+     nohup ./opera --port 3000 --nat any --genesis.allowExperimental --genesis ../genesis.g --http --http.addr="0.0.0.0" --http.port=4000 --http.corsdomain=* --http.vhosts=* --http.api=eth,debug,net,admin,web3,personal,txpool,ftm,dag --bootnodes="enode://efb00913a2a63a38d83aa565ddcb5d919786d746b485e5db4776fa89e6398e05418e919b16ceffd0d93f222c951d0b9033afef9ceb7e262def30b0c6f40a1f49@34.254.168.147:3000" > opera.log &
      ```
+     
      N:B if you only want to run fullnode for rpc then you can stop here.
 
 7. **Create and Fund Validator Wallet**:
@@ -145,7 +139,7 @@ To get started, follow the steps below:
       ftm.getTransactionReceipt(tx) # Look for the status: “0x1” at the bottom, which means the transaction was successful:
      ```
      You can also copy the transactionHash and go the AssetChain BlockScaner and check your transaction there:
-     https://scan-testnet.assetchain.org/tx/[YOURTX]
+     https://scan.assetchain.org/tx/[YOURTX]
 
     - Check your validator status again
     ```bash
@@ -156,7 +150,7 @@ To get started, follow the steps below:
 12. **Run your AssetChain validator Node**
     - Start the node in validator mode:
     ```bash
-    (validator)$ nohup ./opera --bootnodes  enode://27c5f90bd11d2e5df3901c8f893cfcbe0e62c0edfda88170eff43a87eb54c333a1ddce3dc6765eeeccfd37f01e614373e2d0449512735e4a96f528ea53e87ddf@34.147.162.187:3000 --validator.id ID --validator.pubkey 0xPubkey --validator.password /path/to/password > validator.log &
+    (validator)$ nohup ./opera --bootnodes  enode://efb00913a2a63a38d83aa565ddcb5d919786d746b485e5db4776fa89e6398e05418e919b16ceffd0d93f222c951d0b9033afef9ceb7e262def30b0c6f40a1f49@34.254.168.147:3000 --validator.id ID --validator.pubkey 0xPubkey --validator.password /path/to/password > validator.log &
     ```
 
 
