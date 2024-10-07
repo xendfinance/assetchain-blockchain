@@ -4,15 +4,16 @@ This repository contains all resources required to set up a validator node in th
 
 ## Table of Contents
 
-- [Full Node](#full-node)
-- [Mainnet](#mainnet)
+- [Full Node (Lite Client)](#full-node)
+- [Mainnet Validator Node](#mainnet)
+- [Testnet Validator Node](#testnet)
 - [Requirements](#requirements)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
 - [License](#license)
 - [Support](#support)
 
-## Full Node
+## Full Node (Lite Client)
 
 To set up a full node, follow the steps in the [Full Node](FULLNODE.md) guide.
 
@@ -20,7 +21,10 @@ To set up a full node, follow the steps in the [Full Node](FULLNODE.md) guide.
 
 To set up a validator node for mainnet, follow the steps in the [Mainnet](MAINNET.md) guide.
 
-## Requirements
+
+## Testnet
+
+### Requirements
 
 The requirements for running a validator node are shown below:
 
