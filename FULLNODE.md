@@ -1,28 +1,20 @@
 # AssetChain Blockchain
 
-This repository contains all resources required to set up a validator node in the AssetChain Blockchain.
+This repository contains all resources required to set up a full node in the AssetChain Blockchain.
 
 ## Table of Contents
-- [Full Node](#full-node)
 - [Requirements](#requirements)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
 - [License](#license)
 - [Support](#support)
 
-## Full Node
-
-To set up a full node, follow the steps in the [Full Node](FULLNODE.md) guide.
-
 ## Requirements
 
-The requirements for running a validator node are shown below:
+The requirements for running a full node are shown below:
 
-1. **Minimum Stake**: 200,000 RWA
-2. **Maximum Validator Size**: 15x the self-stake amount
-3. **Minimum Hardware Requirements**: AWS EC2 m5.xlarge with 4 vCPUs (3.1 GHz) and at least 1 TB of Amazon EBS General Purpose SSD (gp2) storage (or equivalent).
-4. **Recommended Specifications**: For better performance, consider using AWS m6i.2xlarge, c6i.4xlarge, or bare metal with equivalent or higher specs.
-5. **Rewards**: Currently ~6% APY (Normal APY on self-stake + 15% of delegators' rewards). APY varies based on staked percentage.
+1. **Minimum Hardware Requirements**: AWS EC2 m5.xlarge with 4 vCPUs (3.1 GHz) and at least 1 TB of Amazon EBS General Purpose SSD (gp2) storage (or equivalent).
+2. **Recommended Specifications**: For better performance, consider using AWS m6i.2xlarge, c6i.4xlarge, or bare metal with equivalent or higher specs.
 
 ## Getting Started
 
@@ -39,7 +31,7 @@ To get started, follow the steps below:
 3. **Set up a Non-Root User**:
    - SSH into your machine:
      ```bash
-     ssh root@{VALIDATOR_IP_ADDRESS}
+     ssh root@{FULLNODE_IP_ADDRESS}
      ```
    - Update the system:
      ```bash
@@ -95,64 +87,6 @@ To get started, follow the steps below:
      nohup ./opera --port 3000 --nat any --genesis.allowExperimental --genesis ../genesis.g --http --http.addr="0.0.0.0" --http.port=4000 --http.corsdomain=* --http.vhosts=* --http.api=eth,debug,net,admin,web3,personal,txpool,ftm,dag --bootnodes="enode://27c5f90bd11d2e5df3901c8f893cfcbe0e62c0edfda88170eff43a87eb54c333a1ddce3dc6765eeeccfd37f01e614373e2d0449512735e4a96f528ea53e87ddf@34.147.162.187:3000" > opera.log &
      ```
      N:B if you only want to run fullnode for rpc then you can stop here.
-
-7. **Create and Fund Validator Wallet**:
-   - Create a validator wallet:
-     ```bash
-     ./opera account new
-     ```
-   - Fund the wallet with at least 200,000 RWA.
-
-8. **Create a new validator key**:
-    - Create a validator key:
-     ```bash
-     ./opera validator new
-     ```
-     ![alt text](image.png)
-
-9. **Create your validator via the SFC**:
-   - Initialize the SFC contract ABI variable found [here](abi/sfcc.js)
-   ```bash
-      # Attach to opera console
-      (validator)$ ./opera attach opera.ipc
-      Parse to javascript terminal everything from abi.sfcc.js
-      sfcc = web3.ftm.contract(abi).at("0xfc00face00000000000000000000000000000000")
-   ```
-
-10. **Sanity Check**:
-    
-   ```bash
-      # After initializing both variables, you can now interact with the network’s SFC. Enter the following command to check that everything works as expected:
-      (validator)$ # Sanity check
-      sfcc.lastValidatorID() # if everything is all right, will return a non-zero value
-      sfcc.getValidatorID("{VALIDATOR_WALLET_ADDRESS}") # This should return 0, as you are not registered as a validator yet:
-   ```
-
-11. **Unlock and register validator**
-    - Unlock the validator wallet and register:
-      ```bash
-      personal.unlockAccount("{VALIDATOR_WALLET_ADDRESS}" "{PASSWORD}" 60)
-      tx = sfcc.createValidator("0xYOUR_PUBKEY" {from:"0xYOUR_ADDRESS" value: web3.toWei("200000.0" "ftm")}) # 200000.0 RWA
-      ```
-    - Check your registration transaction
-    ```bash
-      ftm.getTransactionReceipt(tx) # Look for the status: “0x1” at the bottom, which means the transaction was successful:
-     ```
-     You can also copy the transactionHash and go the AssetChain BlockScaner and check your transaction there:
-     https://scan-testnet.assetchain.org/tx/[YOURTX]
-
-    - Check your validator status again
-    ```bash
-      (validator)$ sfcc.getValidatorID("{VALIDATOR_WALLET_ADDRESS}") # It should now return something other than “0”:
-    ```
-
-
-12. **Run your AssetChain validator Node**
-    - Start the node in validator mode:
-    ```bash
-    (validator)$ nohup ./opera --bootnodes  enode://27c5f90bd11d2e5df3901c8f893cfcbe0e62c0edfda88170eff43a87eb54c333a1ddce3dc6765eeeccfd37f01e614373e2d0449512735e4a96f528ea53e87ddf@34.147.162.187:3000 --validator.id ID --validator.pubkey 0xPubkey --validator.password /path/to/password > validator.log &
-    ```
-
 
 
 ## Contributing
