@@ -141,8 +141,8 @@ To get started, follow the steps below:
 11. **Unlock and register validator**
     - Unlock the validator wallet and register:
       ```bash
-      personal.unlockAccount("{VALIDATOR_WALLET_ADDRESS}" "{PASSWORD}" 60)
-      tx = sfcc.createValidator("0xYOUR_PUBKEY" {from:"0xYOUR_ADDRESS" value: web3.toWei("200000.0" "ftm")}) # 200000.0 RWA
+      personal.unlockAccount("{VALIDATOR_WALLET_ADDRESS}", "{PASSWORD}", 60)
+      tx = sfcc.createValidator("0xYOUR_PUBKEY", {from:"0xYOUR_ADDRESS", value: web3.toWei("200000.0", "ftm")}) # 200000.0 RWA
       ```
     - Check your registration transaction
     ```bash
