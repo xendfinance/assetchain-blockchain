@@ -87,7 +87,7 @@ To get started, follow the steps below:
      ```
 
 6. **Start Opera Node**:
-   - Download the genesis file and start the node:
+   - Download the genesis file, start the node and allow it to sync completely:
      ```bash
      curl https://asset.assetchain.org/genesis_new.g --output genesis.g
      cd build/
@@ -95,6 +95,11 @@ To get started, follow the steps below:
      ```
      
      N:B if you only want to run fullnode for rpc then you can stop here.
+
+6a. **Restart the node without http**
+      ```bash
+         nohup ./opera --port 3000 --nat any --genesis.allowExperimental --genesis ../genesis.g --bootnodes="enode://efb00913a2a63a38d83aa565ddcb5d919786d746b485e5db4776fa89e6398e05418e919b16ceffd0d93f222c951d0b9033afef9ceb7e262def30b0c6f40a1f49@34.254.168.147:3000" > opera.log &
+      ```
 
 7. **Create and Fund Validator Wallet**:
    - Create a validator wallet:
