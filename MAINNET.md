@@ -158,7 +158,28 @@ To get started, follow the steps below:
     (validator)$ nohup ./opera --bootnodes  enode://efb00913a2a63a38d83aa565ddcb5d919786d746b485e5db4776fa89e6398e05418e919b16ceffd0d93f222c951d0b9033afef9ceb7e262def30b0c6f40a1f49@34.254.168.147:3000 --validator.id ID --validator.pubkey 0xPubkey --validator.password /path/to/password > validator.log &
     ```
 
+## Claiming Rewards
 
+- Initialize the SFC contract ABI variable found here
+
+```bash
+# Attach to opera console
+(validator)$ ./opera attach opera.ipc
+Parse to javascript terminal everything from abi.sfcc.js
+sfcc = web3.ftm.contract(abi).at("0xfc00face00000000000000000000000000000000")
+```
+
+- Set Default Account
+
+```bash
+web3.ftm.defaultAccount = "{VALIDATOR_WALLET_ADDRESS}"
+```
+
+- Claim your rewards
+
+```bash
+sfcc.claimRewards({VALIDATOR_ID})
+```
 
 ## Contributing
 

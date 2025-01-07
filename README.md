@@ -21,7 +21,6 @@ To set up a full node, follow the steps in the [Full Node](FULLNODE.md) guide.
 
 To set up a validator node for mainnet, follow the steps in the [Mainnet](MAINNET.md) guide.
 
-
 ## Testnet
 
 ### Requirements
@@ -39,14 +38,17 @@ The requirements for running a validator node are shown below:
 To get started, follow the steps below:
 
 1. **Launch Cloud Instance**:
+
    - You can either run a node on your own hardware or use a cloud provider. We recommend using one of the major cloud providers, such as Amazon AWS.
    - We recommend using Ubuntu Server 22.04 LTS (64-bit).
 
 2. **Network Settings**:
+
    - Open up port 22 or any other port of preference for SSH.
    - Open up port 5050 for both TCP and UDP traffic. Alternatively, use the `--port <port>` flag to specify a custom port when running your node.
 
 3. **Set up a Non-Root User**:
+
    - SSH into your machine:
      ```bash
      ssh root@{VALIDATOR_IP_ADDRESS}
@@ -69,6 +71,7 @@ To get started, follow the steps below:
    - Add your SSH public key to the new user's `authorized_keys` file.
 
 4. **Install Required Tools**:
+
    - Install build tools:
      ```bash
      sudo apt install apt-transport-https libc-bin gcc git musl ca-certificates curl zsh make unzip build-essential gawk wget bison flex
@@ -86,6 +89,7 @@ To get started, follow the steps below:
      ```
 
 5. **Install and Set Up Opera**:
+
    - Clone the Opera repository and build:
      ```bash
      git clone https://github.com/xendfinance/assetchain-blockchain
@@ -107,11 +111,12 @@ To get started, follow the steps below:
      N:B if you only want to run fullnode for rpc then you can stop here.
 
 6a. **Restart the node without http**
-      ```bash
+`bash
          nohup ./opera --port 3000 --nat any --genesis.allowExperimental --genesis ../genesis.g --bootnodes="enode://27c5f90bd11d2e5df3901c8f893cfcbe0e62c0edfda88170eff43a87eb54c333a1ddce3dc6765eeeccfd37f01e614373e2d0449512735e4a96f528ea53e87ddf@34.147.162.187:3000" > opera.log &
-      ```
+      `
 
 7. **Create and Fund Validator Wallet**:
+
    - Create a validator wallet:
      ```bash
      ./opera account new
@@ -119,14 +124,19 @@ To get started, follow the steps below:
    - Fund the wallet with at least 200,000 RWA.
 
 8. **Create a new validator key**:
-    - Create a validator key:
-     ```bash
-     ./opera validator new
-     ```
-     ![alt text](image.png)
+
+   - Create a validator key:
+
+   ```bash
+   ./opera validator new
+   ```
+
+   ![alt text](image.png)
 
 9. **Create your validator via the SFC**:
+
    - Initialize the SFC contract ABI variable found [here](abi/sfcc.js)
+
    ```bash
       # Attach to opera console
       (validator)$ ./opera attach opera.ipc
@@ -135,32 +145,35 @@ To get started, follow the steps below:
    ```
 
 10. **Sanity Check**:
-    
-   ```bash
-      # After initializing both variables, you can now interact with the network’s SFC. Enter the following command to check that everything works as expected:
-      (validator)$ # Sanity check
-      sfcc.lastValidatorID() # if everything is all right, will return a non-zero value
-      sfcc.getValidatorID("{VALIDATOR_WALLET_ADDRESS}") # This should return 0, as you are not registered as a validator yet:
-   ```
+
+```bash
+   # After initializing both variables, you can now interact with the network’s SFC. Enter the following command to check that everything works as expected:
+   (validator)$ # Sanity check
+   sfcc.lastValidatorID() # if everything is all right, will return a non-zero value
+   sfcc.getValidatorID("{VALIDATOR_WALLET_ADDRESS}") # This should return 0, as you are not registered as a validator yet:
+```
 
 11. **Unlock and register validator**
+
     - Unlock the validator wallet and register:
       ```bash
       personal.unlockAccount("{VALIDATOR_WALLET_ADDRESS}", "{PASSWORD}", 60)
       tx = sfcc.createValidator("0xYOUR_PUBKEY", {from:"0xYOUR_ADDRESS", value: web3.toWei("200000.0", "ftm")}) # 200000.0 RWA
       ```
     - Check your registration transaction
+
     ```bash
       ftm.getTransactionReceipt(tx) # Look for the status: “0x1” at the bottom, which means the transaction was successful:
-     ```
-     You can also copy the transactionHash and go the AssetChain BlockScaner and check your transaction there:
-     https://scan-testnet.assetchain.org/tx/[YOURTX]
+    ```
+
+    You can also copy the transactionHash and go the AssetChain BlockScaner and check your transaction there:
+    https://scan-testnet.assetchain.org/tx/[YOURTX]
 
     - Check your validator status again
+
     ```bash
       (validator)$ sfcc.getValidatorID("{VALIDATOR_WALLET_ADDRESS}") # It should now return something other than “0”:
     ```
-
 
 12. **Run your AssetChain validator Node**
     - Start the node in validator mode:
@@ -168,7 +181,28 @@ To get started, follow the steps below:
     (validator)$ nohup ./opera --bootnodes  enode://27c5f90bd11d2e5df3901c8f893cfcbe0e62c0edfda88170eff43a87eb54c333a1ddce3dc6765eeeccfd37f01e614373e2d0449512735e4a96f528ea53e87ddf@34.147.162.187:3000 --validator.id ID --validator.pubkey 0xPubkey --validator.password /path/to/password > validator.log &
     ```
 
+## Claiming Rewards
 
+- Initialize the SFC contract ABI variable found here
+
+```bash
+# Attach to opera console
+(validator)$ ./opera attach opera.ipc
+Parse to javascript terminal everything from abi.sfcc.js
+sfcc = web3.ftm.contract(abi).at("0xfc00face00000000000000000000000000000000")
+```
+
+- Set Default Account
+
+```bash
+web3.ftm.defaultAccount = "{VALIDATOR_WALLET_ADDRESS}"
+```
+
+- Claim your rewards
+
+```bash
+sfcc.claimRewards({VALIDATOR_ID})
+```
 
 ## Contributing
 
