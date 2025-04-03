@@ -20,6 +20,7 @@ To set up a full node, follow the steps in the [Full Node](FULLNODE.md) guide.
 ## Mainnet
 
 To set up a validator node for mainnet, follow the steps in the [Mainnet](MAINNET.md) guide.
+To withdraw and reactivate a validator, follow the steps in the [Validator](VALIDATOR.md) guide.
 
 ## Testnet
 

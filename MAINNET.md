@@ -12,6 +12,7 @@ This repository contains all resources required to set up a validator node for m
 ## Full Node
 
 To set up a full node, follow the steps in the [Full Node](FULLNODE.md) guide.
+To withdraw and reactivate a validator, follow the steps in the [Validator](VALIDATOR.md) guide.
 
 ## Requirements
 
