@@ -43,7 +43,8 @@ From the validator address that needs reactivation, initiate a withdrawal reques
      # Get ValidatorID from sfcc.getValidatorID("{VALIDATOR_WALLET_ADDRESS}") e.g 9
      # Amount e.g web3.toWei("200000.0", "ftm")
      # Call the undelegate method
-     tx = sfcc.undelegate({ValidatorID}, {amount})
+     web3.ftm.defaultAccount = "{VALIDATOR_WALLET_ADDRESS}"
+     tx = sfcc.undelegate({ValidatorID}, web3.toWei("{amount}", "ftm"))
      # This returns a withdrawal request ID (wrID)
   ```
 
@@ -71,6 +72,7 @@ From the validator address that needs reactivation, initiate a withdrawal reques
      # Get ValidatorID from sfcc.getValidatorID("{VALIDATOR_WALLET_ADDRESS}") e.g 9
      # Amount e.g web3.toWei("200000.0", "ftm")
      # Call the withdraw method
+     web3.ftm.defaultAccount = "{VALIDATOR_WALLET_ADDRESS}"
      tx = sfcc.withdraw({ValidatorID}, {wrID})
   ```
 
