@@ -105,7 +105,7 @@ To get started, follow the steps below:
 6. **Start Opera Node**:
    - Download the genesis file, start the node and allow it to sync completely:
      ```bash
-     curl https://asset-testnet.assetchain.org/genesis_new.g --output genesis.g
+     curl https://asset-testnet.assetchain.org/genesis_newer.g --output genesis.g
      cd build/
      nohup ./opera --port 3000 --nat any --genesis.allowExperimental --genesis ../genesis.g --http --http.addr="0.0.0.0" --http.port=4000 --http.corsdomain=* --http.vhosts=* --http.api=eth,debug,net,admin,web3,personal,txpool,ftm,dag --bootnodes="enode://27c5f90bd11d2e5df3901c8f893cfcbe0e62c0edfda88170eff43a87eb54c333a1ddce3dc6765eeeccfd37f01e614373e2d0449512735e4a96f528ea53e87ddf@34.147.162.187:3000" > opera.log &
      ```
