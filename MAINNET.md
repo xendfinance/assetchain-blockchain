@@ -92,14 +92,14 @@ To get started, follow the steps below:
      ```bash
      curl https://storage.googleapis.com/assetchain-assets/genesis-mainnet.g --output genesis.g
      cd build/
-     nohup ./opera --port 3000 --nat any --genesis.allowExperimental --genesis ../genesis.g --http --http.addr="0.0.0.0" --http.port=4000 --http.corsdomain=* --http.vhosts=* --http.api=eth,debug,net,admin,web3,personal,txpool,ftm,dag --bootnodes="enode://efb00913a2a63a38d83aa565ddcb5d919786d746b485e5db4776fa89e6398e05418e919b16ceffd0d93f222c951d0b9033afef9ceb7e262def30b0c6f40a1f49@34.254.168.147:3000" > opera.log &
+     nohup ./opera --port 3000 --nat any --genesis.allowExperimental --genesis ../genesis.g --http --http.addr="0.0.0.0" --http.port=4000 --http.corsdomain=* --http.vhosts=* --http.api=eth,debug,net,admin,web3,personal,txpool,ftm,dag --bootnodes="enode://e317d20307b177b8dd79c455e3360daca67fead3563827bc971297ddfb203f1e0a3be79d3a986f46004b45a66809f8446bf4cb5076777cc271b193778039f8cd@34.89.124.248:3000" > opera.log &
      ```
      
      N:B if you only want to run fullnode for rpc then you can stop here.
 
 6a. **Restart the node without http**
       ```bash
-         nohup ./opera --port 3000 --nat any --genesis.allowExperimental --genesis ../genesis.g --bootnodes="enode://efb00913a2a63a38d83aa565ddcb5d919786d746b485e5db4776fa89e6398e05418e919b16ceffd0d93f222c951d0b9033afef9ceb7e262def30b0c6f40a1f49@34.254.168.147:3000" > opera.log &
+         nohup ./opera --port 3000 --nat any --genesis.allowExperimental --genesis ../genesis.g --bootnodes="enode://e317d20307b177b8dd79c455e3360daca67fead3563827bc971297ddfb203f1e0a3be79d3a986f46004b45a66809f8446bf4cb5076777cc271b193778039f8cd@34.89.124.248:3000" > opera.log &
       ```
 
 7. **Create and Fund Validator Wallet**:
@@ -156,7 +156,7 @@ To get started, follow the steps below:
 12. **Run your AssetChain validator Node**
     - Start the node in validator mode:
     ```bash
-    (validator)$ nohup ./opera --bootnodes  enode://efb00913a2a63a38d83aa565ddcb5d919786d746b485e5db4776fa89e6398e05418e919b16ceffd0d93f222c951d0b9033afef9ceb7e262def30b0c6f40a1f49@34.254.168.147:3000 --validator.id ID --validator.pubkey 0xPubkey --validator.password /path/to/password > validator.log &
+    (validator)$ nohup ./opera --bootnodes  enode://e317d20307b177b8dd79c455e3360daca67fead3563827bc971297ddfb203f1e0a3be79d3a986f46004b45a66809f8446bf4cb5076777cc271b193778039f8cd@34.89.124.248:3000 --validator.id ID --validator.pubkey 0xPubkey --validator.password /path/to/password > validator.log &
     ```
 
 ## Claiming Rewards
